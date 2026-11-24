@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Examen de Microeconomía, UNIROMANA</title>
+<style>
+:root{--azul:#1F3864;--azul2:#2c4f8a;--rojo:#B5121B;--txt:#1b2433;--suave:#5d6a7e;--panel:#fff;--panel2:#f5f8fd;--borde:#d3dcea;--bg:#e8edf6;--verde:#157a41;--verdebg:#e6f4ec;--rojobg:#fbe9ea;--info:#eef3fd;--solo:#fff1d6;--solotx:#8a5a00;--clase:#e9e3fb;--clasetx:#4b2c91}
+html[data-theme="dark"]{--txt:#e8edf5;--suave:#a9b6cc;--panel:#152033;--panel2:#1b2942;--borde:#2b3c57;--bg:#0d1626;--verde:#46d07f;--verdebg:rgba(30,142,78,.18);--rojobg:rgba(181,18,27,.22);--info:rgba(108,140,200,.14);--solo:rgba(255,190,80,.18);--solotx:#ffd27a;--clase:rgba(150,120,240,.2);--clasetx:#cbb8ff}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.5;transition:background .3s,color .3s}
+header{background:linear-gradient(120deg,var(--azul),#16273f 60%,var(--rojo) 160%);color:#fff;padding:18px 16px;border-bottom:3px solid var(--rojo)}
+header h1{margin:0;font-size:1.35rem}
+header p{margin:4px 0 0;color:#dde4f0;font-size:.95rem}
+.hud{position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--borde);padding:8px 16px}
+.hud-in{max-width:720px;margin:0 auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.timer{font-weight:700;background:var(--azul);color:#fff;border-radius:8px;padding:4px 12px;font-variant-numeric:tabular-nums}
+.timer.warn{background:#b07800}.timer.danger{background:var(--rojo)}
+.pz{flex:1;min-width:140px}
+.pt{font-size:.8rem;color:var(--suave)}
+.bar{height:10px;background:var(--panel2);border:1px solid var(--borde);border-radius:6px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--azul2),var(--rojo));transition:width .3s}
+.themebtn{border:1px solid var(--borde);background:var(--panel2);color:var(--txt);border-radius:20px;padding:6px 12px;font-size:.85rem;cursor:pointer}
+.wrap{max-width:720px;margin:0 auto;padding:14px}
+.card{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:18px;margin-bottom:14px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+h2{font-size:1.12rem;margin:0 0 10px}
+.muted{color:var(--suave);font-size:.92rem}
+.row{margin:14px 0;padding-bottom:12px;border-bottom:1px dashed var(--borde)}
+.row:last-of-type{border-bottom:0}
+.lbl{font-weight:700;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);border:1px solid var(--borde);border-radius:20px;padding:7px 12px;font-size:.92rem;cursor:pointer}
+.chip input{accent-color:var(--rojo)}
+.grp{font-size:.8rem;font-weight:700;color:var(--suave);margin:8px 0 4px;width:100%}
+select{font-size:.95rem;padding:8px;border-radius:8px;border:1px solid var(--borde);background:var(--panel2);color:var(--txt);width:100%}
+.btn{display:block;width:100%;padding:13px;border:0;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:10px}
+.primary{background:var(--rojo);color:#fff}
+.secondary{background:var(--azul);color:#fff}
+.light{background:var(--panel2);color:var(--txt);border:1px solid var(--borde)}
+.btn:disabled{opacity:.55;cursor:default}
+.two{display:flex;gap:10px}.two .btn{flex:1}
+.aviso{color:var(--rojo);font-weight:700;min-height:1.2em}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tag{font-size:.75rem;padding:3px 9px;border-radius:20px;background:var(--panel2);border:1px solid var(--borde);font-weight:600}
+.tag.solo{background:var(--solo);color:var(--solotx);border-color:transparent}
+.tag.clase{background:var(--clase);color:var(--clasetx);border-color:transparent}
+.q{font-size:1.05rem;font-weight:700;margin:0 0 10px}
+.opt{display:block;width:100%;text-align:left;padding:12px 14px;margin:8px 0;border:2px solid var(--borde);border-radius:10px;background:var(--panel2);color:var(--txt);font-size:1rem;cursor:pointer}
+.opt.sel{border-color:var(--azul2)}
+.opt.ok{border-color:var(--verde);background:var(--verdebg)}
+.opt.bad{border-color:var(--rojo);background:var(--rojobg)}
+.opt:disabled{cursor:default}
+.fb{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:.95rem}
+.fb.ok{background:var(--verdebg);border-left:5px solid var(--verde)}
+.fb.bad{background:var(--rojobg);border-left:5px solid var(--rojo)}
+.fb.model{background:var(--info);border-left:5px solid var(--azul2)}
+textarea{width:100%;min-height:130px;padding:12px;border:2px solid var(--borde);border-radius:10px;font-size:1rem;font-family:inherit;background:var(--panel2);color:var(--txt)}
+.big{font-size:2.4rem;font-weight:800;color:var(--rojo);margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:8px}
+td,th{border:1px solid var(--borde);padding:6px;text-align:center}
+.item{border-top:1px solid var(--borde);padding:12px 0}
+.item:first-child{border-top:0}
+.yours{font-size:.9rem;background:var(--panel2);border-radius:8px;padding:8px;white-space:pre-wrap}
+.hidden{display:none}
+.fb,.q{white-space:pre-line}
+.src{display:block;margin-top:6px;font-size:.82rem;color:var(--suave)}
+.tblwrap{overflow-x:auto;margin:0 0 12px}
+table.dat{min-width:100%}
+table.dat th{background:var(--panel2)}
+table.dat td{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<header><div style="max-width:720px;margin:0 auto">
+<h1>Examen de Microeconomía</h1>
+<p>UNIROMANA, Administración de Empresas. Prof. José Fulgencio.</p>
+</div></header>
+<div class="hud"><div class="hud-in">
+  <span class="timer hidden" id="timer">45:00</span>
+  <div class="pz"><div class="pt" id="progTxt">Configura tu examen</div><div class="bar"><div class="fill" id="fill"></div></div></div>
+  <button class="themebtn" id="themeBtn">Modo oscuro</button>
+</div></div>
+<div class="wrap">
+
+<div class="card" id="config">
+  <h2>Configura tu examen</h2>
+  <p class="muted">Banco de <b id="bankTotal"></b> preguntas: <span id="bankMix"></span>. Se eligen al azar según lo que marques. Cubre lo visto en clase con el profesor José Fulgencio.</p>
+  <div class="row"><div class="lbl">Modo</div><div class="chips">
+    <label class="chip"><input type="radio" name="modo" value="practica" checked> Práctica (corrección inmediata, sin reloj)</label>
+    <label class="chip"><input type="radio" name="modo" value="examen"> Examen (con tiempo, corrección al final)</label>
+  </div></div>
+  <div class="row"><div class="lbl">Nivel</div><div class="chips">
+    <label class="chip"><input type="radio" name="nivel" value="normal" checked> Normal</label>
+    <label class="chip"><input type="radio" name="nivel" value="dificil"> Difícil (resta 0,5 por fallo en la nota y un tercio menos de tiempo)</label>
+  </div></div>
+  <div class="row"><div class="lbl">Temas</div><div class="chips" id="subs"></div><button class="btn light" id="toggleAll" type="button" style="margin-top:8px">Quitar todos</button></div>
+  <div class="row"><div class="lbl">Longitud</div>
+    <select id="longitud">
+      <option value="corta">Corta: 3 V/F, 4 selección múltiple, 1 desarrollo</option>
+      <option value="media" selected>Media: 6 V/F, 8 selección múltiple, 3 desarrollo</option>
+      <option value="larga">Larga: 9 V/F, 12 selección múltiple, 5 desarrollo</option>
+      <option value="todo">Completa: todas las preguntas elegidas</option>
+    </select></div>
+  <div class="row" id="rowTiempo"><div class="lbl">Tiempo (modo examen)</div>
+    <select id="tiempo">
+      <option value="1800">30 minutos</option>
+      <option value="2700" selected>45 minutos</option>
+      <option value="3600">60 minutos</option>
+      <option value="0">Sin límite</option>
+    </select></div>
+  <p class="aviso" id="aviso"></p>
+  <p class="muted" id="disp"></p>
+  <button class="btn primary" id="go">Comenzar</button>
+</div>
+
+<div class="card hidden" id="quiz">
+  <div class="tags" id="tags"></div>
+  <p class="q" id="q"></p>
+  <div id="tbl"></div>
+  <div id="area"></div>
+  <div id="fb"></div>
+  <div class="two"><button class="btn light" id="prev">Anterior</button><button class="btn secondary" id="next">Siguiente</button></div>
+  <button class="btn light hidden" id="finishEarly">Terminar y ver resultados</button>
+</div>
+
+<div class="hidden" id="end">
+  <div class="card">
+    <h2>Resultado</h2>
+    <div class="big" id="pct"></div>
+    <p id="score"></p>
+    <p id="nota"></p>
+    <div id="tabla"></div>
+    <p class="muted" id="pendOpen"></p>
+  </div>
+  <div class="card" id="openCard"><h2>Preguntas de desarrollo</h2><p class="muted">Compara tu respuesta con la modelo y marca si la tenías.</p><div id="openList"></div></div>
+  <div class="card"><h2>Preguntas falladas</h2><div id="missed"></div></div>
+  <div class="card">
+    <button class="btn primary" id="again">Repetir el mismo examen</button>
+    <button class="btn secondary" id="againMissed">Repetir solo las falladas</button>
+    <button class="btn light" id="reconf">Configurar otro examen</button>
+  </div>
+</div>
+</div>
+<script>
+const BANCO = [
+ {
+  "id": 1,
+  "tema": "Curvas de indiferencia",
+  "type": "mc",
+  "q": "¿Qué representa una curva de indiferencia?",
+  "options": [
+   "Todas las combinaciones de dos bienes que cuestan lo mismo.",
+   "Todas las combinaciones de dos bienes que le dan al consumidor el mismo nivel de satisfacción.",
+   "Todas las cantidades que el consumidor puede pagar con su ingreso.",
+   "La relación entre el precio de un bien y la cantidad que se demanda."
+  ],
+  "answer": "B",
+  "exp": "Una curva de indiferencia une combinaciones de dos bienes que producen la misma satisfacción, por eso al consumidor le da igual estar en cualquier punto de ella. Lo que se puede pagar lo muestra la restricción presupuestaria, no la curva.",
+  "model": "",
+  "src": "Guion grupal de curvas de indiferencia (Hadassah, Dilayner, Miriam) y documento individual de Raúl, tema 2.3"
+ },
+ {
+  "id": 2,
+  "tema": "Curvas de indiferencia",
+  "type": "mc",
+  "q": "Un conductor mantiene la misma satisfacción al pasar de 4 galones de gasolina y 15 lavados a 5 galones y 12 lavados. ¿Cuál es la tasa marginal de sustitución (TMS) de ese tramo?",
+  "options": [
+   "0.33",
+   "1",
+   "3",
+   "5"
+  ],
+  "answer": "C",
+  "exp": "Paso 1: ΔX = 5 - 4 = 1 y ΔY = 12 - 15 = -3. Paso 2: TMS = |ΔY / ΔX| = |-3 / 1| = 3. Renuncia a 3 lavados por 1 galón más.",
+  "model": "",
+  "src": "Guion grupal de curvas de indiferencia (Hadassah, Dilayner, Miriam) y documento individual de Raúl, tema 2.3"
+ },
+ {
+  "id": 3,
+  "tema": "Curvas de indiferencia",
+  "type": "tf",
+  "q": "Dos curvas de indiferencia del mismo consumidor pueden cruzarse cuando sus gustos son muy cambiantes.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Si se cruzaran, el punto de cruce tendría dos niveles de satisfacción a la vez. Por transitividad, dos combinaciones de curvas distintas valdrían lo mismo, aunque una tenga más de un bien y la misma cantidad del otro, lo que contradice que más es mejor.",
+  "model": "",
+  "src": "Guion grupal de curvas de indiferencia (Hadassah, Dilayner, Miriam) y documento individual de Raúl, tema 2.3"
+ },
+ {
+  "id": 4,
+  "tema": "Curvas de indiferencia",
+  "type": "tf",
+  "q": "Mientras más alejada del origen está una curva de indiferencia, mayor nivel de satisfacción representa, suponiendo que el consumidor prefiere más a menos.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. Una curva más lejana del origen contiene combinaciones con mayor cantidad de bienes. En el mapa de curvas, U3 da más satisfacción que U2 y esta más que U1.",
+  "model": "",
+  "src": "Guion grupal de curvas de indiferencia (Hadassah, Dilayner, Miriam) y documento individual de Raúl, tema 2.3"
+ },
+ {
+  "id": 5,
+  "tema": "Curvas de indiferencia",
+  "type": "open",
+  "q": "Explica por qué las curvas de indiferencia son convexas al origen. Usa la TMS y un ejemplo con gasolina y lavados.",
+  "options": [],
+  "answer": "",
+  "exp": "La TMS decreciente explica la forma. Fórmula: TMS = |ΔY / ΔX|.",
+  "model": "La convexidad aparece porque la TMS disminuye a lo largo de la curva. Cuando una persona tiene poco de un bien, una unidad extra vale mucho para ella y está dispuesta a ceder bastante del otro. Cuando ya tiene mucho de ese bien, una unidad más vale poco y no quiere soltar lo poco que le queda del otro. Ejemplo del material: con 3 galones y 20 lavados, el conductor cede 5 lavados por un galón más (TMS = 5); con 15 galones y 4 lavados, cambiaría solo 1 lavado por 5 galones adicionales (TMS de 0.2 por galón). La curva es más empinada a la izquierda y más plana a la derecha. Las personas prefieren combinaciones equilibradas a los extremos.",
+  "src": "Guion grupal de curvas de indiferencia (Hadassah, Dilayner, Miriam) y documento individual de Raúl, tema 2.3"
+ },
+ {
+  "id": 6,
+  "tema": "Restricción presupuestaria",
+  "type": "mc",
+  "q": "Un estudiante tiene RD$1,200 para comprar cuadernos (X) a RD$60 y carpetas (Y) a RD$40 en una librería. ¿Cuáles son los interceptos de su recta de presupuesto?",
+  "options": [
+   "20 cuadernos en X y 30 carpetas en Y",
+   "30 cuadernos en X y 20 carpetas en Y",
+   "60 cuadernos en X y 40 carpetas en Y",
+   "1,200 en X y 1,200 en Y"
+  ],
+  "answer": "A",
+  "exp": "Intercepto en X = I / Px = 1,200 / 60 = 20 cuadernos. Intercepto en Y = I / Py = 1,200 / 40 = 30 carpetas. Comprobación: 60 × 20 = 1,200 y 40 × 30 = 1,200.",
+  "model": "",
+  "src": "Guion grupal (Dayana y Raúl) y documento individual de Raúl, tema 2.4"
+ },
+ {
+  "id": 7,
+  "tema": "Restricción presupuestaria",
+  "type": "mc",
+  "q": "¿Qué mide la pendiente de la recta de presupuesto, -Px/Py?",
+  "options": [
+   "La satisfacción total que obtiene el consumidor.",
+   "Cuánto está dispuesto a ceder el consumidor según sus gustos.",
+   "El ingreso real del consumidor.",
+   "El costo de oportunidad de un bien medido en unidades del otro bien."
+  ],
+  "answer": "D",
+  "exp": "La pendiente la fijan los precios del mercado y mide cuántas unidades de Y se sacrifican por una unidad más de X. Es negativa porque con ingreso fijo comprar más de un bien obliga a comprar menos del otro. Lo que depende de los gustos es la TMS, no esta pendiente.",
+  "model": "",
+  "src": "Guion grupal (Dayana y Raúl) y documento individual de Raúl, tema 2.4"
+ },
+ {
+  "id": 8,
+  "tema": "Restricción presupuestaria",
+  "type": "tf",
+  "q": "Un punto que queda por debajo de la recta de presupuesto es una combinación que el consumidor puede pagar, pero le sobra dinero.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. Sobre la recta se gasta todo el ingreso; por debajo es asequible y deja dinero sin gastar; por encima cuesta más que el ingreso y no se puede comprar. El área bajo la recta es el conjunto presupuestario.",
+  "model": "",
+  "src": "Guion grupal (Dayana y Raúl) y documento individual de Raúl, tema 2.4"
+ },
+ {
+  "id": 9,
+  "tema": "Restricción presupuestaria",
+  "type": "open",
+  "q": "Un conductor tiene RD$8,000 al mes para gasolina (X) a RD$400 el galón y lavados (Y) a RD$500 cada uno. (a) Escribe la ecuación de la recta. (b) Calcula los interceptos y la pendiente. (c) Indica si puede pagar 10 galones y 8 lavados, y si puede pagar 15 galones y 8 lavados.",
+  "options": [],
+  "answer": "",
+  "exp": "Se aplica Px · X + Py · Y = I, interceptos I/Px e I/Py y pendiente -Px/Py.",
+  "model": "(a) Px · X + Py · Y = I: 400X + 500Y = 8,000. Al despejar Y: Y = I/Py - (Px/Py) · X = 16 - 0.8X.\n(b) Intercepto en Y = 8,000 / 500 = 16 lavados. Intercepto en X = 8,000 / 400 = 20 galones. Pendiente = -Px/Py = -400/500 = -0.8: cada galón extra cuesta 0.8 lavados.\n(c) 10 galones y 8 lavados: 400 × 10 + 500 × 8 = 4,000 + 4,000 = 8,000. Está sobre la recta, usa todo el ingreso, sí puede. 15 galones y 8 lavados: 400 × 15 + 500 × 8 = 6,000 + 4,000 = 10,000, más que 8,000, no le alcanza.",
+  "src": "Guion grupal (Dayana y Raúl) y documento individual de Raúl, tema 2.4"
+ },
+ {
+  "id": 10,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "type": "mc",
+  "q": "Una persona compra en la librería y sus precios no cambian, pero su ingreso sube. ¿Qué le pasa a su recta de presupuesto?",
+  "options": [
+   "Gira sobre el intercepto del eje Y.",
+   "Se desplaza en forma paralela hacia afuera.",
+   "Se desplaza en forma paralela hacia adentro.",
+   "No cambia."
+  ],
+  "answer": "B",
+  "exp": "El ingreso solo aparece en los interceptos (I/Px e I/Py) y no en la pendiente -Px/Py. Si sube, los interceptos aumentan y la recta se mueve paralela hacia afuera. Si baja, se mueve paralela hacia adentro. Si cambia un precio, en cambio, la recta gira.",
+  "model": "",
+  "src": "Guion grupal (Daniel y Rolkin) y documento individual de Raúl, temas 2.4 y equilibrio"
+ },
+ {
+  "id": 11,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "type": "mc",
+  "q": "Con I = RD$6,000, Px = RD$300 (gasolina) y Py = RD$500 (lavado), el precio de la gasolina sube a RD$375. ¿Cuáles son los nuevos interceptos y la nueva pendiente?",
+  "options": [
+   "X = 16 y Y = 12, pendiente -0.75",
+   "X = 20 y Y = 12, pendiente -0.6",
+   "X = 16 y Y = 9.6, pendiente -0.75",
+   "X = 20 y Y = 9.6, pendiente -0.6"
+  ],
+  "answer": "A",
+  "exp": "Intercepto en X = 6,000 / 375 = 16 galones. El intercepto en Y sigue en 6,000 / 500 = 12, porque el precio del lavado no cambió. Pendiente = -375 / 500 = -0.75. La recta gira hacia adentro sobre el punto fijo del eje Y.",
+  "model": "",
+  "src": "Guion grupal (Daniel y Rolkin) y documento individual de Raúl, temas 2.4 y equilibrio"
+ },
+ {
+  "id": 12,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "type": "tf",
+  "q": "Si el ingreso y todos los precios se duplican a la vez, la recta de presupuesto se desplaza hacia afuera.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Los interceptos I/Px e I/Py quedan iguales y la pendiente -Px/Py también, así que la recta no cambia. Lo que importa es el ingreso real, o sea el ingreso en relación con los precios. Ejemplo del material: 40, 4 y 2 pasan a 80, 8 y 4 y los interceptos siguen en 10 y 20.",
+  "model": "",
+  "src": "Guion grupal (Daniel y Rolkin) y documento individual de Raúl, temas 2.4 y equilibrio"
+ },
+ {
+  "id": 13,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "type": "open",
+  "q": "Un consumidor tiene preferencias U = X · Y, ingreso de RD$6,000, y los precios son Px = RD$300 (gasolina) y Py = RD$500 (lavados). Halla su equilibrio con la condición TMS = Px/Py y explica qué significa. Luego indica qué pasa con la compra de gasolina si Px sube a RD$375.",
+  "options": [],
+  "answer": "",
+  "exp": "Condición de equilibrio TMS = Px/Py en la tangencia de la recta con la curva.",
+  "model": "Con U = X · Y, la TMS = Y/X. En el equilibrio, TMS = Px/Py, así que Y/X = 300/500 = 0.6 y Y = 0.6X. Se sustituye en la recta 300X + 500Y = 6,000: 300X + 500(0.6X) = 6,000, es decir 600X = 6,000, X = 10 galones y Y = 6 lavados. Gasta RD$3,000 en cada bien y alcanza U = 6 × 10 = 60. Significado: el equilibrio es el punto donde la recta toca (es tangente a) la curva de indiferencia más alta que puede alcanzar sin pasar de su presupuesto; ahí la persona valora el intercambio entre bienes igual que el mercado. Con Px = 375: Y/X = 375/500 = 0.75, Y = 0.75X; 375X + 500(0.75X) = 6,000, 750X = 6,000, X = 8 galones y Y = 6 lavados (U = 48). Compra menos gasolina al subir su precio, como dice la ley de la demanda.",
+  "src": "Guion grupal (Daniel y Rolkin) y documento individual de Raúl, temas 2.4 y equilibrio"
+ },
+ {
+  "id": 14,
+  "tema": "Clasificación de los costos",
+  "type": "mc",
+  "q": "¿Cuál de estos es un costo desembolsable de un taller de mecánica?",
+  "options": [
+   "La depreciación del elevador hidráulico.",
+   "El sueldo que el dueño dejó de ganar en su empleo anterior.",
+   "El pago de los salarios de los empleados.",
+   "El alquiler que el dueño podría cobrar por su local propio."
+  ],
+  "answer": "C",
+  "exp": "Un costo desembolsable implica una salida de dinero, hoy o más adelante, como materia prima, salarios y electricidad. La depreciación no saca dinero en el momento en que se registra. Los otros dos son costos de oportunidad, que no generan factura ni pago.",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 15,
+  "tema": "Clasificación de los costos",
+  "type": "mc",
+  "q": "Un taller compra un equipo en RD$240,000. Se espera que dure 5 años y que al final valga RD$30,000 (valor residual). ¿Cuánto es su depreciación anual?",
+  "options": [
+   "RD$210,000",
+   "RD$30,000",
+   "RD$48,000",
+   "RD$42,000"
+  ],
+  "answer": "D",
+  "exp": "Depreciación anual = (Costo - Valor residual) / Vida útil = (240,000 - 30,000) / 5 = 210,000 / 5 = RD$42,000 al año, o RD$3,500 al mes. Si se olvidara el valor residual saldría 48,000, que es el error más común.",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 16,
+  "tema": "Clasificación de los costos",
+  "type": "mc",
+  "q": "Un dueño de librería deja un empleo que le pagaba RD$40,000 al mes. Su local propio podría alquilarse en RD$20,000 al mes. Además, RD$300,000 de sus ahorros están en el negocio y en un certificado le rendirían 6 % anual. ¿Cuál es su costo de oportunidad mensual por tener el negocio?",
+  "options": [
+   "RD$60,000",
+   "RD$61,500",
+   "RD$78,000",
+   "RD$41,500"
+  ],
+  "answer": "B",
+  "exp": "Se suman los tres recursos distintos, cada uno con su mejor alternativa. Sueldo: 40,000. Alquiler: 20,000. Intereses: 300,000 × 6 % = 18,000 al año, entre 12 = 1,500 al mes. Total: 40,000 + 20,000 + 1,500 = RD$61,500. Error común: sumar los 18,000 anuales como si fueran mensuales (78,000).",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 17,
+  "tema": "Clasificación de los costos",
+  "type": "tf",
+  "q": "El costo de oportunidad es la suma del valor de todas las alternativas a las que se renuncia al decidir.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Es el valor de la mejor alternativa a la que se renuncia, no la suma de todas. Solo se puede escoger una opción, así que solo cuenta la que se habría elegido. Sí se pueden sumar los costos de oportunidad de recursos distintos, como el tiempo, el local y los ahorros, pero no dos usos del mismo recurso.",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 18,
+  "tema": "Clasificación de los costos",
+  "type": "tf",
+  "q": "Los costos no desembolsables, como la depreciación, se registran en la contabilidad aunque en ese momento no salga efectivo.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. No implican un pago inmediato, se registran en la contabilidad y afectan el resultado de la empresa. Ejemplos: la depreciación de vehículos y maquinaria y la amortización de intangibles como un software o una licencia.",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 19,
+  "tema": "Clasificación de los costos",
+  "type": "tf",
+  "q": "El sistema de costos por procesos es el que usan las empresas que trabajan por pedido, como un taller o una imprenta.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Ese es el sistema por órdenes de producción. El sistema por procesos lo usan empresas de producción continua y estandarizada, como fábricas de refrescos, cemento o agua embotellada, y el costo unitario sale de dividir los costos del departamento entre las unidades producidas.",
+  "model": "",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 20,
+  "tema": "Clasificación de los costos",
+  "type": "open",
+  "q": "Un taller factura RD$310,000 en el mes. Sus costos desembolsables son RD$225,000 y su depreciación es RD$7,500. Los costos de oportunidad del dueño suman RD$73,750. (a) Calcula la utilidad contable. (b) Calcula la utilidad económica. (c) Interpreta el resultado.",
+  "options": [],
+  "answer": "",
+  "exp": "Utilidad económica = utilidad contable - costos implícitos (costos de oportunidad).",
+  "model": "(a) Utilidad contable = Ingresos - Costos contables = 310,000 - (225,000 + 7,500) = 310,000 - 232,500 = RD$77,500.\n(b) Utilidad económica = Utilidad contable - Costos implícitos = 77,500 - 73,750 = RD$3,750.\n(c) Como la utilidad económica es positiva, el taller le deja al dueño un poco más que su mejor alternativa (volver a ser empleado, alquilar el local y guardar sus ahorros), pero el margen es muy pequeño comparado con lo que muestran los libros (77,500). El costo de oportunidad no aparece en la contabilidad, por eso un negocio puede tener ganancia contable y aun así no convenir.",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 21,
+  "tema": "Clasificación de los costos",
+  "type": "open",
+  "q": "Un taller presupuesta RD$120,000 de costos indirectos de fabricación (CIF) para 400 horas de mano de obra al mes. La orden 052 usa RD$50,000 de materiales directos y 40 horas de mano de obra a RD$400 la hora. (a) Calcula la tasa de CIF. (b) Calcula el costo total de la orden. (c) Calcula el precio si pone un margen de 30 %. (d) Explica en una frase en qué se diferencia este sistema del de procesos.",
+  "options": [],
+  "answer": "",
+  "exp": "Sistema por órdenes: tasa de CIF = CIF presupuestados / horas presupuestadas.",
+  "model": "(a) Tasa de CIF = CIF presupuestados / Horas presupuestadas = 120,000 / 400 = RD$300 por hora.\n(b) Materiales directos 50,000 + mano de obra directa 40 × 400 = 16,000 + CIF aplicados 40 × 300 = 12,000 = RD$78,000.\n(c) Precio = 78,000 × 1.30 = RD$101,400.\n(d) Por órdenes, cada pedido es distinto y sus costos se acumulan en una hoja de costos por orden; por procesos, las unidades son iguales y los costos se acumulan por departamento y período, y se dividen entre las unidades producidas.",
+  "src": "Guion grupal de clasificación de los costos (diapositivas de cada expositor) y documento de Raúl"
+ },
+ {
+  "id": 22,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "mc",
+  "q": "¿Qué es el ingreso marginal (IM)?",
+  "options": [
+   "El ingreso total dividido entre la cantidad vendida.",
+   "El precio al que se vende cada unidad.",
+   "La suma de los ingresos de todas las unidades vendidas.",
+   "El cambio en el ingreso total cuando se vende una unidad adicional."
+  ],
+  "answer": "D",
+  "exp": "IM = ΔIT / ΔQ. Responde la pregunta de cuánto más entra a la caja por vender una unidad más. El ingreso total dividido entre la cantidad sería el precio promedio, y la suma de todos los ingresos es el ingreso total.",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 23,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "mc",
+  "q": "Un autolavado ingresa RD$9,000 con 3 servicios al día y RD$11,200 con 4 servicios. ¿Cuál es el ingreso marginal del cuarto servicio?",
+  "options": [
+   "RD$2,800",
+   "RD$20,200",
+   "RD$2,200",
+   "RD$11,200"
+  ],
+  "answer": "C",
+  "exp": "IM = ΔIT / ΔQ = (11,200 - 9,000) / (4 - 3) = 2,200 / 1 = RD$2,200. Los 2,800 salen de dividir 11,200 entre 4, que es el precio promedio, no el ingreso marginal.",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 24,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "mc",
+  "q": "El costo fijo de una imprenta es RD$2,000. Con 5 unidades su costo total es RD$6,000 y con 6 unidades es RD$7,800. ¿Cuál es el coste marginal de la sexta unidad?",
+  "options": [
+   "RD$1,800",
+   "RD$1,300",
+   "RD$5,800",
+   "RD$7,800"
+  ],
+  "answer": "A",
+  "exp": "CM = ΔCT / ΔQ = (7,800 - 6,000) / (6 - 5) = 1,800. El costo fijo no aparece en el cálculo porque es igual con 5 y con 6 unidades y se cancela al restar. Los 1,300 son el costo promedio (7,800 / 6).",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 25,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "tf",
+  "q": "Cuando una empresa tiene que bajar el precio para vender más, el ingreso marginal es menor que el precio.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. La nueva unidad aporta su precio, pero la rebaja se aplica también a las unidades anteriores, y eso resta ingreso. Ejemplo del material: el tercer detallado se cobra a RD$4,500 pero el IM es 4,000, porque los dos anteriores pierden RD$250 cada uno (500 en total). Solo cuando la empresa vende al precio del mercado, IM = precio.",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 26,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "tf",
+  "q": "Si sube el costo fijo, por ejemplo el alquiler del local, la cantidad que maximiza el beneficio también cambia.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. El costo fijo no forma parte del coste marginal, así que la cantidad óptima no cambia. Solo baja el beneficio. Ejemplo del material: si el costo fijo pasa de RD$4,000 a RD$7,000, Carlos sigue haciendo 5 detallados, pero su beneficio baja de 6,500 a 3,500.",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 27,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "tf",
+  "q": "Si en una unidad el ingreso marginal es mayor que el coste marginal, a la empresa le conviene producir esa unidad.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. Esa unidad aporta más ingreso del que cuesta, así que suma al beneficio. Se sigue produciendo mientras IM sea mayor que CM y se para cuando deja de serlo (IM = CM). Si IM es menor que CM, la unidad resta.",
+  "model": "",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 28,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "open",
+  "q": "Una librería ofrece encuadernación de tesis. Su costo fijo es RD$500 al día y la tabla da el ingreso marginal y el coste marginal de cada tesis adicional. (a) ¿Cuántas tesis le conviene encuadernar al día? Compara IM con CM unidad por unidad. (b) Calcula el beneficio con esa cantidad. (c) Si el costo fijo sube a RD$900, ¿cambia la cantidad óptima? ¿Y el beneficio?",
+  "options": [],
+  "answer": "",
+  "exp": "Regla: producir mientras IM > CM; el costo fijo no cambia la cantidad óptima.",
+  "model": "(a) Se compara IM con CM: Q1: 900 > 300 (suma 600); Q2: 800 > 400 (suma 400); Q3: 700 > 500 (suma 200); Q4: 600 < 650 (resta 50); Q5: 500 < 800; Q6: 400 < 950. La cuarta ya cuesta más de lo que aporta, así que se detiene en 3 tesis.\n(b) Ingreso total = 900 + 800 + 700 = 2,400. Costo total = costo fijo + suma de CM = 500 + (300 + 400 + 500) = 1,700. Beneficio = 2,400 - 1,700 = RD$700. Como control, con 4 tesis el beneficio sería 3,000 - 2,350 = 650, menor que 700.\n(c) La cantidad óptima no cambia (sigue en 3), porque el costo fijo no está en el coste marginal. El beneficio baja a 2,400 - (900 + 1,200) = RD$300.",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl",
+  "table": {
+   "head": [
+    "Cantidad (Q)",
+    "IM (RD$)",
+    "CM (RD$)"
+   ],
+   "rows": [
+    [
+     1,
+     900,
+     300
+    ],
+    [
+     2,
+     800,
+     400
+    ],
+    [
+     3,
+     700,
+     500
+    ],
+    [
+     4,
+     600,
+     650
+    ],
+    [
+     5,
+     500,
+     800
+    ],
+    [
+     6,
+     400,
+     950
+    ]
+   ]
+  }
+ },
+ {
+  "id": 29,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "open",
+  "q": "Explica la regla IM = CM para maximizar beneficios. Incluye: qué pasa si IM > CM y si IM < CM, un ejemplo numérico con el taller de Carlos (quinta y sexta unidad), las tres condiciones para que la regla funcione y en qué se convierte la regla en una empresa que vende al precio del mercado.",
+  "options": [],
+  "answer": "",
+  "exp": "Regla central del tema: IM = CM, bajo las condiciones habituales del modelo.",
+  "model": "La regla: el beneficio es máximo en el nivel de producción donde el ingreso marginal es igual al coste marginal (IM = CM). Si IM > CM, la unidad adicional suma al beneficio y conviene producirla; si IM < CM, resta y no conviene.\nEjemplo (taller de Carlos, precio P = 5,250 - 250Q): el quinto detallado tiene IM = 3,000 y CM = 2,500, suma 500; el sexto tiene IM = 2,500 y CM = 3,000, resta 500. Las líneas se cruzan entre 5 y 6 (en 5.5, donde valen 2,750); como no puede hacer medio detallado, se queda en 5, con un beneficio de RD$6,500 (IT 20,000 - CT 13,500).\nCondiciones: (1) el coste marginal debe estar subiendo cuando cruza al ingreso marginal; (2) el ingreso debe cubrir al menos los costes variables, si no es mejor cerrar (Carlos ingresa 20,000 y sus costes variables son 9,500); (3) el costo fijo no cambia la cantidad óptima.\nEn una empresa que vende al precio del mercado el IM es igual al precio, así que la regla se convierte en P = CM.",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 30,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "type": "open",
+  "q": "Carlos (taller de detallado) tiene un beneficio máximo de RD$6,500 con 5 detallados. Una subida de los insumos aumenta RD$800 el costo de cada detallado. Con IM del cuarto = 3,500 y del quinto = 3,000, y CM original del cuarto = 2,100 y del quinto = 2,500: (a) calcula los nuevos coste marginales, (b) decide cuántos detallados conviene hacer, (c) calcula el nuevo beneficio. Datos: con 4 detallados IT = 17,000 y CT original = 11,000.",
+  "options": [],
+  "answer": "",
+  "exp": "Un aumento del coste marginal baja la cantidad óptima; la regla sirve para ajustarse a cambios.",
+  "model": "(a) Nuevo CM del cuarto = 2,100 + 800 = 2,900. Nuevo CM del quinto = 2,500 + 800 = 3,300.\n(b) Cuarto: IM 3,500 > CM 2,900, conviene. Quinto: IM 3,000 < CM 3,300, ya no conviene. La producción óptima baja de 5 a 4 detallados.\n(c) Nuevo costo total con 4 = 11,000 + 4 × 800 = 14,200. Beneficio = 17,000 - 14,200 = RD$2,800 (antes era 6,500).\nLección: un aumento del coste marginal lleva a producir menos. Nota: en el guion y el documento del grupo aparece RD$2,600; la cuenta correcta con estos datos es RD$2,800.",
+  "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ }
+];
+const TEMAS = ["Curvas de indiferencia","Restricción presupuestaria","Cambios en ingreso y precios, y equilibrio","Clasificación de los costos","Ingreso marginal, coste marginal y maximización"];
+(function(){
+var SUBS=TEMAS;
+var TIPOS={mc:"Selección múltiple",tf:"Verdadero o falso",open:"Desarrollo"};
+var LONG={corta:[3,4,1],media:[6,8,3],larga:[9,12,5]};
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"\x26amp;","<":"\x26lt;",">":"\x26gt;","\"":"\x26quot;"}[c];});}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function store(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+
+/* tema oscuro */
+function setTheme(t){document.documentElement.setAttribute("data-theme",t);$("themeBtn").textContent=t==="dark"?"Modo claro":"Modo oscuro";}
+var saved=store("tema");setTheme(saved==="dark"||saved==="light"?saved:(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+$("themeBtn").onclick=function(){var t=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";setTheme(t);store("tema",t);};
+
+/* configuración */
+var cnt={mc:0,tf:0,open:0};BANCO.forEach(function(p){cnt[p.type]++;});
+$("bankTotal").textContent=BANCO.length;
+$("bankMix").textContent=cnt.mc+" de selección múltiple, "+cnt.tf+" de verdadero o falso y "+cnt.open+" de desarrollo";
+var subsHtml="";
+TEMAS.forEach(function(t,k){
+  var n=BANCO.filter(function(p){return p.tema===t;}).length;
+  subsHtml+='<label class="chip"><input type="checkbox" class="subChk" value="'+k+'" checked> '+esc(t)+' ('+n+')</label>';
+});
+$("subs").innerHTML=subsHtml;
+function subChks(){return Array.prototype.slice.call(document.querySelectorAll(".subChk"));}
+function updToggle(){$("toggleAll").textContent=subChks().every(function(c){return c.checked;})?"Quitar todos":"Marcar todos";}
+$("toggleAll").onclick=function(){var all=subChks().every(function(c){return c.checked;});subChks().forEach(function(c){c.checked=!all;});updToggle();updDisp();};
+document.addEventListener("change",function(e){
+  if(e.target.classList&&e.target.classList.contains("subChk"))updToggle();
+  if(e.target.name==="modo")$("rowTiempo").style.display=modo()==="examen"?"":"none";
+  updDisp();
+});
+function modo(){return document.querySelector('input[name="modo"]:checked').value;}
+function nivel(){return document.querySelector('input[name="nivel"]:checked').value;}
+function pool(){var s=subChks().filter(function(c){return c.checked;}).map(function(c){return TEMAS[+c.value];});return BANCO.filter(function(p){return s.indexOf(p.tema)>=0;});}
+function updDisp(){var p=pool();var c={mc:0,tf:0,open:0};p.forEach(function(x){c[x.type]++;});$("disp").textContent="Disponibles con tu selección: "+p.length+" ("+c.tf+" V/F, "+c.mc+" selección múltiple, "+c.open+" desarrollo).";}
+$("rowTiempo").style.display="none";updDisp();
+
+/* estado */
+var exam=[],i=0,cur="practica",lvl="normal",timer=null,left=0,done=false;
+function build(list){
+  return list.map(function(p){
+    var o={p:p,given:null,text:"",self:null,shown:false,order:null};
+    if(p.type==="mc")o.order=shuffle([0,1,2,3]);
+    return o;
+  });
+}
+function pickExam(){
+  var p=pool();
+  if($("longitud").value==="todo")return shuffle(p.slice());
+  var L=LONG[$("longitud").value],out=[];
+  [["tf",L[0]],["mc",L[1]],["open",L[2]]].forEach(function(x){out=out.concat(shuffle(p.filter(function(q){return q.type===x[0];})).slice(0,x[1]));});
+  return out;
+}
+function start(list){
+  exam=build(list);i=0;done=false;cur=modo();lvl=nivel();
+  $("config").classList.add("hidden");$("end").classList.add("hidden");$("quiz").classList.remove("hidden");
+  if(timer)clearInterval(timer);
+  var secs=+$("tiempo").value; if(lvl==="dificil")secs=Math.round(secs*2/3);
+  if(cur==="examen"&&secs>0){left=secs;$("timer").classList.remove("hidden","warn","danger");tick();timer=setInterval(tick,1000);}else $("timer").classList.add("hidden");
+  $("finishEarly").classList.toggle("hidden",cur!=="examen");
+  render();window.scrollTo(0,0);
+}
+function tick(){
+  var m=Math.floor(left/60),s=left%60;$("timer").textContent=m+":"+(s<10?"0":"")+s;
+  $("timer").classList.toggle("danger",left<=60);$("timer").classList.toggle("warn",left>60&&left<=180);
+  if(left<=0){clearInterval(timer);timer=null;finish();return;}
+  left--;
+}
+function answered(o){return o.p.type==="open"?(o.text.trim()!==""||o.shown):o.given!==null;}
+function prog(){
+  var n=exam.filter(answered).length;
+  $("fill").style.width=(exam.length?n/exam.length*100:0)+"%";
+  $("progTxt").textContent=done?"Examen terminado":"Pregunta "+(i+1)+" de "+exam.length+", respondidas "+n;
+}
+function letterOf(o,pos){return "ABCD"[o.order[pos]];}
+function rightText(p){return p.type==="mc"?p.options["ABCD".indexOf(p.answer)]:p.type==="tf"?(p.answer==="V"?"Verdadero":"Falso"):p.model;}
+function tagsHtml(p){
+  return '<span class="tag">'+esc(p.tema)+'</span><span class="tag">'+TIPOS[p.type]+'</span>';
+}
+function tableHtml(t){
+  if(!t)return "";
+  return '<div class="tblwrap"><table class="dat"><tr>'+t.head.map(function(x){return "<th>"+esc(x)+"</th>";}).join("")+"</tr>"+t.rows.map(function(r){return "<tr>"+r.map(function(c){return "<td>"+esc(c)+"</td>";}).join("")+"</tr>";}).join("")+"</table></div>";
+}
+function srcHtml(p){return '<span class="src">Fuente: '+esc(p.src)+'</span>';}
+function render(){
+  var o=exam[i],p=o.p,instant=cur==="practica";
+  $("tags").innerHTML=tagsHtml(p);
+  $("q").textContent=(i+1)+". "+p.q;
+  $("tbl").innerHTML=tableHtml(p.table);
+  $("fb").innerHTML="";
+  var a=$("area");a.innerHTML="";
+  if(p.type==="open"){
+    var ta=document.createElement("textarea");ta.placeholder="Escribe tu respuesta aquí";ta.value=o.text;
+    ta.oninput=function(){o.text=ta.value;prog();};a.appendChild(ta);
+    if(instant){
+      var b=document.createElement("button");b.className="btn light";b.textContent="Ver respuesta modelo";b.id="verModelo";
+      b.onclick=function(){o.shown=true;render();};a.appendChild(b);
+      if(o.shown){b.disabled=true;showModel(o);}
+    }
+  }else{
+    var idxs=p.type==="mc"?o.order:[0,1],keys=p.type==="mc"?["A","B","C","D"]:["V","F"];
+    idxs.forEach(function(orig,pos){
+      var key=p.type==="mc"?"ABCD"[orig]:keys[pos];
+      var btn=document.createElement("button");btn.className="opt";
+      btn.textContent=(p.type==="mc"?"abcd"[pos]+") ":"")+p.options[orig];
+      if(o.given===key)btn.classList.add("sel");
+      if(instant&&o.given!==null){btn.disabled=true;if(key===p.answer)btn.classList.add("ok");else if(key===o.given)btn.classList.add("bad");}
+      btn.onclick=function(){if(instant&&o.given!==null)return;o.given=key;render();prog();};
+      a.appendChild(btn);
+    });
+    if(instant&&o.given!==null){
+      var ok=o.given===p.answer;
+      $("fb").innerHTML='<div class="fb '+(ok?"ok":"bad")+'"><b>'+(ok?"¡Correcto!":"Incorrecto.")+'</b> Respuesta correcta: '+esc(rightText(p))+'<br>'+esc(p.exp)+srcHtml(p)+'</div>';
+    }
+  }
+  $("prev").disabled=i===0;
+  $("next").textContent=i===exam.length-1?"Ver resultados":"Siguiente";
+  prog();
+}
+function showModel(o){
+  $("fb").innerHTML='<div class="fb model"><b>Respuesta modelo:</b><br>'+esc(o.p.model)+'<br><br><span class="muted">'+esc(o.p.exp)+'</span>'+srcHtml(o.p)+'</div>'+
+   '<p class="muted" style="margin-bottom:0">¿Tu respuesta cubría lo esencial?</p><div class="two"><button class="btn light" id="yes">Sí, la tenía</button><button class="btn light" id="no">Me faltó</button></div>';
+  if(o.self!==null)$(o.self?"yes":"no").className="btn secondary";
+  $("yes").onclick=function(){o.self=true;render();};$("no").onclick=function(){o.self=false;render();};
+}
+$("prev").onclick=function(){if(i>0){i--;render();window.scrollTo(0,0);}};
+$("next").onclick=function(){
+  if(i<exam.length-1){i++;render();window.scrollTo(0,0);return;}
+  if(cur==="examen"&&exam.some(function(o){return !answered(o);})&&!confirm("Hay preguntas sin responder. ¿Ver resultados igualmente?"))return;
+  finish();
+};
+$("finishEarly").onclick=function(){if(confirm("¿Terminar el examen y ver resultados?"))finish();};
+function isOk(o){return o.p.type==="open"?o.self===true:o.given===o.p.answer;}
+function finish(){
+  done=true;if(timer){clearInterval(timer);timer=null;}
+  $("quiz").classList.add("hidden");$("end").classList.remove("hidden");
+  $("fill").style.width="100%";
+  var opens=exam.filter(function(o){return o.p.type==="open";});
+  $("openCard").classList.toggle("hidden",opens.length===0);
+  var h="";
+  exam.forEach(function(o,k){
+    if(o.p.type!=="open")return;
+    h+='<div class="item"><div class="tags">'+tagsHtml(o.p)+'</div><b>'+(k+1)+'. '+esc(o.p.q)+'</b>'+tableHtml(o.p.table)+
+      '<p class="muted" style="margin:6px 0 2px">Tu respuesta:</p><div class="yours">'+(o.text.trim()?esc(o.text):"(sin responder)")+'</div>'+
+      '<div class="fb model"><b>Respuesta modelo:</b><br>'+esc(o.p.model)+'<br><span class="muted">'+esc(o.p.exp)+'</span>'+srcHtml(o.p)+'</div>'+
+      '<div class="two"><button class="btn '+(o.self===true?"secondary":"light")+' selfBtn" data-k="'+k+'" data-v="1">Sí, la tenía</button><button class="btn '+(o.self===false?"secondary":"light")+' selfBtn" data-k="'+k+'" data-v="0">Me faltó</button></div></div>';
+  });
+  $("openList").innerHTML=h;
+  Array.prototype.forEach.call(document.querySelectorAll(".selfBtn"),function(b){b.onclick=function(){exam[+b.dataset.k].self=b.dataset.v==="1";finish();};});
+  summary();window.scrollTo(0,0);
+}
+function summary(){
+  var n=exam.length,good=exam.filter(isOk).length;
+  var auto=exam.filter(function(o){return o.p.type!=="open";}),autoOk=auto.filter(isOk).length;
+  $("pct").textContent=(n?Math.round(good/n*100):0)+"%";
+  $("score").textContent="Acertaste "+good+" de "+n+" preguntas.";
+  var nota=n?good/n*10:0,pen="";
+  if(lvl==="dificil"){var f=auto.length-autoOk;nota=Math.max(0,nota-f*0.5);pen=" (nivel difícil: menos 0,5 por cada fallo de V/F o selección múltiple)";}
+  $("nota").textContent="Nota aproximada: "+nota.toFixed(1).replace(".",",")+" de 10"+pen+".";
+  var pend=exam.filter(function(o){return o.p.type==="open"&&o.self===null;}).length;
+  $("pendOpen").textContent=pend?("Te faltan por marcar "+pend+" preguntas de desarrollo; cuentan como falladas hasta que las marques."):"";
+  var t={};exam.forEach(function(o){var k=o.p.tema+"|"+o.p.type;t[k]=t[k]||[0,0];t[k][1]++;if(isOk(o))t[k][0]++;});
+  var tb='<table><tr><th>Tema</th><th>V/F</th><th>Selección</th><th>Desarrollo</th></tr>';
+  TEMAS.forEach(function(tm){if(!exam.some(function(o){return o.p.tema===tm;}))return;tb+='<tr><td style="text-align:left">'+esc(tm)+'</td>';["tf","mc","open"].forEach(function(ty){var v=t[tm+"|"+ty];tb+='<td>'+(v?v[0]+" de "+v[1]:"-")+'</td>';});tb+='</tr>';});
+  $("tabla").innerHTML=tb+'</table>';
+  var m="";
+  exam.forEach(function(o,k){
+    if(isOk(o))return;var p=o.p;
+    var yours=p.type==="open"?"":'<p><b>Tu respuesta:</b> '+(o.given===null?"(sin responder)":esc(p.type==="mc"?p.options["ABCD".indexOf(o.given)]:(o.given==="V"?"Verdadero":"Falso")))+'</p>';
+    m+='<div class="item"><div class="tags">'+tagsHtml(p)+'</div><b>'+(k+1)+'. '+esc(p.q)+'</b>'+tableHtml(p.table)+yours+'<p><b>Respuesta correcta:</b> '+esc(rightText(p))+'</p><p class="muted">'+esc(p.exp)+srcHtml(p)+'</p></div>';
+  });
+  $("missed").innerHTML=m||"<p>No fallaste ninguna. ¡Excelente!</p>";
+  $("againMissed").disabled=!exam.some(function(o){return !isOk(o);});
+}
+$("go").onclick=function(){
+  var l=pickExam();
+  if(!l.length){$("aviso").textContent="Selecciona al menos un tema.";return;}
+  $("aviso").textContent="";start(l);
+};
+$("again").onclick=function(){start(exam.map(function(o){return o.p;}));};
+$("againMissed").onclick=function(){var l=exam.filter(function(o){return !isOk(o);}).map(function(o){return o.p;});if(l.length)start(l);};
+$("reconf").onclick=function(){$("end").classList.add("hidden");$("config").classList.remove("hidden");$("timer").classList.add("hidden");$("progTxt").textContent="Configura tu examen";$("fill").style.width="0";window.scrollTo(0,0);};
+})();
+</script>
+</body>
+</html>
