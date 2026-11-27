@@ -91,7 +91,7 @@ table.dat td{font-variant-numeric:tabular-nums}
 
 <div class="card" id="config">
   <h2>Configura tu examen</h2>
-  <p class="muted">Banco de <b id="bankTotal"></b> preguntas: <span id="bankMix"></span>. Se eligen al azar según lo que marques. Cubre lo visto en clase con el profesor José Fulgencio.</p>
+  <p class="muted">Banco de <b id="bankTotal"></b> preguntas: <span id="bankMix"></span>. Se eligen al azar según lo que marques. Cubre el compendio de clase del profesor José Fulgencio y los temas de la lista del viernes.</p>
   <div class="row"><div class="lbl">Modo</div><div class="chips">
     <label class="chip"><input type="radio" name="modo" value="practica" checked> Práctica (corrección inmediata, sin reloj)</label>
     <label class="chip"><input type="radio" name="modo" value="examen"> Examen (con tiempo, corrección al final)</label>
@@ -100,7 +100,7 @@ table.dat td{font-variant-numeric:tabular-nums}
     <label class="chip"><input type="radio" name="nivel" value="normal" checked> Normal</label>
     <label class="chip"><input type="radio" name="nivel" value="dificil"> Difícil (resta 0,5 por fallo en la nota y un tercio menos de tiempo)</label>
   </div></div>
-  <div class="row"><div class="lbl">Temas</div><div class="chips" id="subs"></div><button class="btn light" id="toggleAll" type="button" style="margin-top:8px">Quitar todos</button></div>
+  <div class="row"><div class="lbl">Categorías</div><div class="chips" id="cats"></div></div><div class="row"><div class="lbl">Temas</div><div class="chips" id="subs"></div><button class="btn light" id="toggleAll" type="button" style="margin-top:8px">Quitar todos</button></div>
   <div class="row"><div class="lbl">Longitud</div>
     <select id="longitud">
       <option value="corta">Corta: 3 V/F, 4 selección múltiple, 1 desarrollo</option>
@@ -153,6 +153,7 @@ const BANCO = [
  {
   "id": 1,
   "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "¿Qué representa una curva de indiferencia?",
   "options": [
@@ -169,6 +170,7 @@ const BANCO = [
  {
   "id": 2,
   "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Un conductor mantiene la misma satisfacción al pasar de 4 galones de gasolina y 15 lavados a 5 galones y 12 lavados. ¿Cuál es la tasa marginal de sustitución (TMS) de ese tramo?",
   "options": [
@@ -185,6 +187,7 @@ const BANCO = [
  {
   "id": 3,
   "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Dos curvas de indiferencia del mismo consumidor pueden cruzarse cuando sus gustos son muy cambiantes.",
   "options": [
@@ -199,6 +202,7 @@ const BANCO = [
  {
   "id": 4,
   "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Mientras más alejada del origen está una curva de indiferencia, mayor nivel de satisfacción representa, suponiendo que el consumidor prefiere más a menos.",
   "options": [
@@ -213,6 +217,7 @@ const BANCO = [
  {
   "id": 5,
   "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Explica por qué las curvas de indiferencia son convexas al origen. Usa la TMS y un ejemplo con gasolina y lavados.",
   "options": [],
@@ -224,6 +229,7 @@ const BANCO = [
  {
   "id": 6,
   "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Un estudiante tiene RD$1,200 para comprar cuadernos (X) a RD$60 y carpetas (Y) a RD$40 en una librería. ¿Cuáles son los interceptos de su recta de presupuesto?",
   "options": [
@@ -240,6 +246,7 @@ const BANCO = [
  {
   "id": 7,
   "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "¿Qué mide la pendiente de la recta de presupuesto, -Px/Py?",
   "options": [
@@ -256,6 +263,7 @@ const BANCO = [
  {
   "id": 8,
   "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Un punto que queda por debajo de la recta de presupuesto es una combinación que el consumidor puede pagar, pero le sobra dinero.",
   "options": [
@@ -270,6 +278,7 @@ const BANCO = [
  {
   "id": 9,
   "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Un conductor tiene RD$8,000 al mes para gasolina (X) a RD$400 el galón y lavados (Y) a RD$500 cada uno. (a) Escribe la ecuación de la recta. (b) Calcula los interceptos y la pendiente. (c) Indica si puede pagar 10 galones y 8 lavados, y si puede pagar 15 galones y 8 lavados.",
   "options": [],
@@ -281,6 +290,7 @@ const BANCO = [
  {
   "id": 10,
   "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Una persona compra en la librería y sus precios no cambian, pero su ingreso sube. ¿Qué le pasa a su recta de presupuesto?",
   "options": [
@@ -297,6 +307,7 @@ const BANCO = [
  {
   "id": 11,
   "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Con I = RD$6,000, Px = RD$300 (gasolina) y Py = RD$500 (lavado), el precio de la gasolina sube a RD$375. ¿Cuáles son los nuevos interceptos y la nueva pendiente?",
   "options": [
@@ -313,6 +324,7 @@ const BANCO = [
  {
   "id": 12,
   "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Si el ingreso y todos los precios se duplican a la vez, la recta de presupuesto se desplaza hacia afuera.",
   "options": [
@@ -327,6 +339,7 @@ const BANCO = [
  {
   "id": 13,
   "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Un consumidor tiene preferencias U = X · Y, ingreso de RD$6,000, y los precios son Px = RD$300 (gasolina) y Py = RD$500 (lavados). Halla su equilibrio con la condición TMS = Px/Py y explica qué significa. Luego indica qué pasa con la compra de gasolina si Px sube a RD$375.",
   "options": [],
@@ -338,6 +351,7 @@ const BANCO = [
  {
   "id": 14,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "¿Cuál de estos es un costo desembolsable de un taller de mecánica?",
   "options": [
@@ -354,6 +368,7 @@ const BANCO = [
  {
   "id": 15,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Un taller compra un equipo en RD$240,000. Se espera que dure 5 años y que al final valga RD$30,000 (valor residual). ¿Cuánto es su depreciación anual?",
   "options": [
@@ -370,6 +385,7 @@ const BANCO = [
  {
   "id": 16,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Un dueño de librería deja un empleo que le pagaba RD$40,000 al mes. Su local propio podría alquilarse en RD$20,000 al mes. Además, RD$300,000 de sus ahorros están en el negocio y en un certificado le rendirían 6 % anual. ¿Cuál es su costo de oportunidad mensual por tener el negocio?",
   "options": [
@@ -386,6 +402,7 @@ const BANCO = [
  {
   "id": 17,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "El costo de oportunidad es la suma del valor de todas las alternativas a las que se renuncia al decidir.",
   "options": [
@@ -400,6 +417,7 @@ const BANCO = [
  {
   "id": 18,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Los costos no desembolsables, como la depreciación, se registran en la contabilidad aunque en ese momento no salga efectivo.",
   "options": [
@@ -414,6 +432,7 @@ const BANCO = [
  {
   "id": 19,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "El sistema de costos por procesos es el que usan las empresas que trabajan por pedido, como un taller o una imprenta.",
   "options": [
@@ -428,6 +447,7 @@ const BANCO = [
  {
   "id": 20,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Un taller factura RD$310,000 en el mes. Sus costos desembolsables son RD$225,000 y su depreciación es RD$7,500. Los costos de oportunidad del dueño suman RD$73,750. (a) Calcula la utilidad contable. (b) Calcula la utilidad económica. (c) Interpreta el resultado.",
   "options": [],
@@ -439,6 +459,7 @@ const BANCO = [
  {
   "id": 21,
   "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Un taller presupuesta RD$120,000 de costos indirectos de fabricación (CIF) para 400 horas de mano de obra al mes. La orden 052 usa RD$50,000 de materiales directos y 40 horas de mano de obra a RD$400 la hora. (a) Calcula la tasa de CIF. (b) Calcula el costo total de la orden. (c) Calcula el precio si pone un margen de 30 %. (d) Explica en una frase en qué se diferencia este sistema del de procesos.",
   "options": [],
@@ -450,6 +471,7 @@ const BANCO = [
  {
   "id": 22,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "¿Qué es el ingreso marginal (IM)?",
   "options": [
@@ -466,6 +488,7 @@ const BANCO = [
  {
   "id": 23,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "Un autolavado ingresa RD$9,000 con 3 servicios al día y RD$11,200 con 4 servicios. ¿Cuál es el ingreso marginal del cuarto servicio?",
   "options": [
@@ -482,6 +505,7 @@ const BANCO = [
  {
   "id": 24,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "mc",
   "q": "El costo fijo de una imprenta es RD$2,000. Con 5 unidades su costo total es RD$6,000 y con 6 unidades es RD$7,800. ¿Cuál es el coste marginal de la sexta unidad?",
   "options": [
@@ -498,6 +522,7 @@ const BANCO = [
  {
   "id": 25,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Cuando una empresa tiene que bajar el precio para vender más, el ingreso marginal es menor que el precio.",
   "options": [
@@ -512,6 +537,7 @@ const BANCO = [
  {
   "id": 26,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Si sube el costo fijo, por ejemplo el alquiler del local, la cantidad que maximiza el beneficio también cambia.",
   "options": [
@@ -526,6 +552,7 @@ const BANCO = [
  {
   "id": 27,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "tf",
   "q": "Si en una unidad el ingreso marginal es mayor que el coste marginal, a la empresa le conviene producir esa unidad.",
   "options": [
@@ -540,6 +567,7 @@ const BANCO = [
  {
   "id": 28,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Una librería ofrece encuadernación de tesis. Su costo fijo es RD$500 al día y la tabla da el ingreso marginal y el coste marginal de cada tesis adicional. (a) ¿Cuántas tesis le conviene encuadernar al día? Compara IM con CM unidad por unidad. (b) Calcula el beneficio con esa cantidad. (c) Si el costo fijo sube a RD$900, ¿cambia la cantidad óptima? ¿Y el beneficio?",
   "options": [],
@@ -590,6 +618,7 @@ const BANCO = [
  {
   "id": 29,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Explica la regla IM = CM para maximizar beneficios. Incluye: qué pasa si IM > CM y si IM < CM, un ejemplo numérico con el taller de Carlos (quinta y sexta unidad), las tres condiciones para que la regla funcione y en qué se convierte la regla en una empresa que vende al precio del mercado.",
   "options": [],
@@ -601,6 +630,7 @@ const BANCO = [
  {
   "id": 30,
   "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
   "type": "open",
   "q": "Carlos (taller de detallado) tiene un beneficio máximo de RD$6,500 con 5 detallados. Una subida de los insumos aumenta RD$800 el costo de cada detallado. Con IM del cuarto = 3,500 y del quinto = 3,000, y CM original del cuarto = 2,100 y del quinto = 2,500: (a) calcula los nuevos coste marginales, (b) decide cuántos detallados conviene hacer, (c) calcula el nuevo beneficio. Datos: con 4 detallados IT = 17,000 y CT original = 11,000.",
   "options": [],
@@ -608,9 +638,1018 @@ const BANCO = [
   "exp": "Un aumento del coste marginal baja la cantidad óptima; la regla sirve para ajustarse a cambios.",
   "model": "(a) Nuevo CM del cuarto = 2,100 + 800 = 2,900. Nuevo CM del quinto = 2,500 + 800 = 3,300.\n(b) Cuarto: IM 3,500 > CM 2,900, conviene. Quinto: IM 3,000 < CM 3,300, ya no conviene. La producción óptima baja de 5 a 4 detallados.\n(c) Nuevo costo total con 4 = 11,000 + 4 × 800 = 14,200. Beneficio = 17,000 - 14,200 = RD$2,800 (antes era 6,500).\nLección: un aumento del coste marginal lleva a producir menos. Nota: en el guion y el documento del grupo aparece RD$2,600; la cuenta correcta con estos datos es RD$2,800.",
   "src": "Guion grupal de ingreso marginal, coste marginal y maximización, y documento individual de Raúl"
+ },
+ {
+  "id": 31,
+  "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Las curvas de indiferencia se construyen con el enfoque ordinal de la utilidad. ¿Qué significa eso?",
+  "options": [
+   "Que la utilidad se mide con números exactos, como si U = 90 fuera 50 % mejor que U = 60.",
+   "Que basta con que la persona pueda ordenar sus opciones (cuál prefiere o si le da igual), sin medir la satisfacción en unidades.",
+   "Que el consumidor siempre gasta todo su ingreso.",
+   "Que los precios determinan la forma de la curva."
+  ],
+  "answer": "B",
+  "exp": "El enfoque cardinal pretende medir la utilidad con números exactos. El ordinal solo pide un orden de preferencias. Las curvas de indiferencia usan el ordinal: U = 90 se prefiere a U = 60, pero no quiere decir que sea un 50 % mejor. Esos números solo ordenan.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 1, a partir de los guiones grupales y el documento individual de Raúl"
+ },
+ {
+  "id": 32,
+  "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "¿Qué es el mapa de indiferencia?",
+  "options": [
+   "La recta que une los interceptos I/Px e I/Py.",
+   "Una sola curva que pasa por el origen (0,0).",
+   "El conjunto de curvas de indiferencia que representa las preferencias de una persona; cada curva es un nivel distinto de satisfacción.",
+   "La tabla de costos fijos y variables de una empresa."
+  ],
+  "answer": "C",
+  "exp": "El mapa reúne las curvas del consumidor. En el gráfico se dibujan pocas (U1, U2, U3), pero en teoría hay infinitas. Misma curva significa el mismo nivel de satisfacción; una más lejos del origen, mayor satisfacción. El mapa es personal: cada persona tiene el suyo.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 1"
+ },
+ {
+  "id": 33,
+  "tema": "Curvas de indiferencia",
+  "grupo": "Compendio del profesor",
+  "type": "tf",
+  "q": "Si una combinación tiene U = 90 y otra U = 60, se puede afirmar que la primera produce exactamente un 50 % más de felicidad.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. En el enfoque ordinal esos valores solo sirven para ordenar: se prefiere 90 a 60, sin que la diferencia mida una cantidad real de felicidad.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 1"
+ },
+ {
+  "id": 34,
+  "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "¿Cuál es la diferencia entre la TMS y la pendiente de la recta de presupuesto?",
+  "options": [
+   "No hay diferencia: siempre son el mismo número, en cualquier punto.",
+   "La TMS la fijan los gustos de cada persona (pendiente de la curva); la pendiente de la recta la fijan los precios del mercado y es igual para todos. Solo se igualan en el equilibrio.",
+   "La TMS la fijan los precios y la pendiente de la recta la fijan los gustos.",
+   "La TMS solo existe si el ingreso sube, y la pendiente de la recta solo si baja un precio."
+  ],
+  "answer": "B",
+  "exp": "Es una trampa habitual de examen. La TMS depende de las preferencias y cambia a lo largo de la curva. La pendiente -Px/Py la ponen los precios y es la misma para todos los consumidores. La condición de equilibrio es precisamente TMS = Px/Py (en valor, igualando pendientes).",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, secciones 2, 4 y 8 (errores comunes)"
+ },
+ {
+  "id": 35,
+  "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Dayana tiene un ingreso de RD$1,000, con Px = 100 y Py = 50. La combinación de 4 unidades de X y 8 de Y:",
+  "options": [
+   "Está sobre la recta de presupuesto, porque gasta exactamente 1,000.",
+   "Está fuera del conjunto presupuestario, porque no le alcanza.",
+   "Está dentro del conjunto presupuestario, pero no sobre la línea, porque gasta 800 y le sobra ingreso.",
+   "No se puede saber sin la TMS."
+  ],
+  "answer": "C",
+  "exp": "Gasto = 100 × 4 + 50 × 8 = 400 + 400 = RD$800, que es menor que 1,000. Es asequible (está en el conjunto de oportunidades), pero no agota el ingreso, así que no está sobre la línea presupuestaria. Sobre la recta estarían, por ejemplo, 5 de X y 10 de Y, o 10 de X y 0 de Y.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 2, ejemplo de Dayana"
+ },
+ {
+  "id": 36,
+  "tema": "Restricción presupuestaria",
+  "grupo": "Compendio del profesor",
+  "type": "open",
+  "q": "Explica la diferencia entre la TMS y la pendiente de la recta de presupuesto. ¿En qué punto se igualan y por qué eso es el equilibrio del consumidor?",
+  "options": [],
+  "answer": "",
+  "exp": "TMS = |ΔY/ΔX| (gustos). Pendiente de la recta = -Px/Py (precios). Equilibrio: tangencia, TMS = Px/Py.",
+  "model": "La TMS mide cuánto de un bien está dispuesta a ceder una persona por una unidad más del otro, según sus gustos, y es la pendiente (en valor absoluto) de la curva de indiferencia. La pendiente de la recta de presupuesto, -Px/Py, es el costo de oportunidad que pone el mercado y es igual para todos. Se igualan en el punto de tangencia entre la curva más alta alcanzable y la recta. Ahí la persona no gana nada cambiando un poco de X por Y (o al revés) y alcanza la mayor satisfacción que puede pagar. Si TMS fuera distinta de Px/Py, le convendría moverse a lo largo de la recta hacia una curva más alta.",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, secciones 2 y 4"
+ },
+ {
+  "id": 37,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "La condición equivalente a TMS = Px/Py, escrita con utilidades marginales por peso, es:",
+  "options": [
+   "UMgX × Px = UMgY × Py",
+   "UMgX / Px = UMgY / Py",
+   "UMgX + UMgY = I",
+   "UMgX / UMgY = I"
+  ],
+  "answer": "B",
+  "exp": "En el equilibrio, el último peso rinde lo mismo en ambos bienes: UMgX/Px = UMgY/Py. Es la misma idea que igualar la TMS al cociente de precios. Si una razón es mayor, conviene gastar un poco más en ese bien y menos en el otro.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 4 (fórmulas clave)"
+ },
+ {
+  "id": 38,
+  "tema": "Cambios en ingreso y precios, y equilibrio",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Con U = X · Y, I = RD$6,000, Px = 300 y Py = 500, el equilibrio es 10 galones y 6 lavados. Si la gasolina sube a RD$375, el nuevo equilibrio es 8 galones y 6 lavados. ¿Qué ilustra este resultado?",
+  "options": [
+   "La ley de la demanda: al subir el precio de la gasolina, la cantidad demandada baja de 10 a 8 galones.",
+   "Que la TMS dejó de existir.",
+   "Que el consumidor ahora gasta más del ingreso disponible.",
+   "Que la recta se desplazó en paralelo hacia afuera porque subió el ingreso."
+  ],
+  "answer": "A",
+  "exp": "Al subir Px, la recta gira hacia adentro (el intercepto en X pasa a 16). El nuevo tangencia es X = 8, Y = 6 y U = 48. La cantidad de gasolina baja de 10 a 8: es la ley de la demanda. Repitiendo el ejercicio con varios precios se puede trazar la curva de demanda.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 4, ejemplo de Carlos"
+ },
+ {
+  "id": 39,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Según la clasificación por nivel de actividad usada en el taller, la electricidad suele ser un costo:",
+  "options": [
+   "Fijo, porque no cambia nunca.",
+   "Variable puro, porque es proporcional a cada pieza.",
+   "Semivariable (o mixto): tiene una parte que se paga igual y otra que sube con el uso.",
+   "De oportunidad, porque no aparece en la contabilidad."
+  ],
+  "answer": "C",
+  "exp": "En el material (criterios FUNIBER, taller de carros) el seguro es fijo, las piezas son variables y la electricidad es semivariable: hay un cargo básico y un consumo que depende de la actividad. El costo total sigue siendo CT = CF + CV, y lo semivariable se descompone en esas dos partes.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5 (criterios FUNIBER)"
+ },
+ {
+  "id": 40,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Un taller ya pagó RD$40,000 por un estudio de mercado que no se puede recuperar. Está decidiendo si compra un elevador nuevo. Ese estudio es:",
+  "options": [
+   "Un costo variable de cada trabajo futuro.",
+   "Un costo social externo, porque lo pagan los vecinos.",
+   "Un costo relevante, porque debe sumarse al precio del elevador.",
+   "Un costo hundido, e irrelevante para la decisión de comprar o no el elevador."
+  ],
+  "answer": "D",
+  "exp": "Un costo hundido es dinero ya gastado que no se puede recuperar. No cambia según se compre o no el elevador, así que es irrelevante para esa decisión. Lo relevante sería, por ejemplo, el precio del elevador nuevo (lo que sí cambia con la decisión).",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5 (relevantes, irrelevantes y costo hundido)"
+ },
+ {
+  "id": 41,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "El costo social de un taller que desecha mal el aceite usado es:",
+  "options": [
+   "La suma de los costos privados (lo que paga el taller) más los costos externos (el daño a terceros, como contaminar el agua).",
+   "Únicamente la multa, si es que existe.",
+   "Solo lo que el taller paga de su bolsillo.",
+   "Solo el daño a terceros, sin contar lo que paga el taller."
+  ],
+  "answer": "A",
+  "exp": "Costo social = costos privados + costos externos. Lo que paga el taller es el costo privado; el aceite mal desechado genera un costo a terceros que hay que sumar para obtener el costo social.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5 (costos privados y sociales)"
+ },
+ {
+  "id": 42,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "La orden 045 se cotizó en RD$118,000 y terminó costando RD$124,000. ¿Qué tipos de costo, según el momento del cálculo, ilustra este caso?",
+  "options": [
+   "Costo predeterminado de 118,000, costo histórico de 124,000 y una desviación de 6,000.",
+   "Solo un costo hundido de 124,000.",
+   "Solo un costo de oportunidad de 118,000.",
+   "Un costo social de 6,000, porque la diferencia la pagan los vecinos."
+  ],
+  "answer": "A",
+  "exp": "Los costos predeterminados se calculan antes (la cotización de 118,000, útil para fijar el precio). Los históricos se conocen al terminar (124,000). La desviación es 124,000 - 118,000 = RD$6,000.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5, ejemplo de la orden 045"
+ },
+ {
+  "id": 43,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "El seguro del taller es RD$8,000 al mes (fijo). En el mes se hacen 40 cambios de aceite con RD$60,000 de costos variables. Si el costo marginal del servicio 41 es RD$1,500, ¿cuál es el costo total y el costo medio de los 40 servicios?",
+  "options": [
+   "CT = RD$8,000 y CMe = RD$200",
+   "CT = RD$68,000 y CMe = RD$1,500",
+   "CT = RD$60,000 y CMe = RD$1,500",
+   "CT = RD$68,000 y CMe = RD$1,700"
+  ],
+  "answer": "D",
+  "exp": "CT = CF + CV = 8,000 + 60,000 = RD$68,000. CMe = 68,000 / 40 = RD$1,700. El CM del servicio 41 (1,500) no se mete en esas 40 unidades: el seguro, al ser fijo, ya estaba pagado y no forma parte del coste marginal.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5 (nivel de actividad) y sección 7 (fórmulas)"
+ },
+ {
+  "id": 44,
+  "tema": "Clasificación de los costos",
+  "grupo": "Compendio del profesor",
+  "type": "tf",
+  "q": "Los costos de fabricación (material directo, mano de obra directa y CIF) se distinguen de los gastos de operaciones, como administración y ventas.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. En el material del taller, por función, los costos de fabricación se asocian a producir (por ejemplo, la pintura de un carro). Los gastos de operaciones cubren administración y ventas (por ejemplo, el sueldo de la secretaria o la publicidad).",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 5 (función que los origina)"
+ },
+ {
+  "id": 45,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
+  "type": "mc",
+  "q": "Si una empresa es tan pequeña que vende al precio del mercado (competencia perfecta), la regla IM = CM se convierte en:",
+  "options": [
+   "IM = 0, para maximizar el ingreso total.",
+   "CMe = 0, para eliminar los costos fijos.",
+   "P = CF, porque el costo fijo determina el precio.",
+   "P = CM, porque en ese caso el ingreso marginal coincide con el precio."
+  ],
+  "answer": "D",
+  "exp": "Si no hay que bajar el precio para vender una unidad más, IM = P. Entonces maximizar beneficios exige P = CM. El material lo ilustra con un ejemplo de botellas de aceite a RD$80: conviene llegar hasta la unidad cuyo coste marginal es 80.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, secciones 6.4, 6.7 y 7"
+ },
+ {
+  "id": 46,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
+  "type": "tf",
+  "q": "Para maximizar el beneficio, la empresa debe producir unidades hasta que el ingreso marginal sea cero.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Producir hasta IM = 0 maximiza el ingreso total, no el beneficio. El beneficio se maximiza donde IM = CM (y el CM está subiendo), siempre que el ingreso cubra al menos los costes variables.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 8 (errores comunes)"
+ },
+ {
+  "id": 47,
+  "tema": "Ingreso marginal, coste marginal y maximización",
+  "grupo": "Compendio del profesor",
+  "type": "tf",
+  "q": "La cantidad que minimiza el costo medio es, en todos los casos, la que maximiza el beneficio.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Es una trampa de examen: no se elige la cantidad mirando el costo promedio, sino comparando ingreso marginal y coste marginal. El mínimo del CMe es otro concepto (eficiencia productiva), y no coincide siempre con el máximo de beneficio.",
+  "model": "",
+  "src": "Compendio de Microeconomía (26 nov 2026), Prof. José Fulgencio, sección 8 (errores comunes)"
+ },
+ {
+  "id": 48,
+  "tema": "Qué es la economía",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Cuál es la definición más aceptada de economía en los manuales introductorios?",
+  "options": [
+   "El estudio de cómo las empresas maximizan sus ventas en el corto plazo.",
+   "El estudio de cómo la sociedad administra sus recursos escasos para producir bienes y servicios y distribuirlos.",
+   "El registro contable de los ingresos y los gastos de un país.",
+   "La técnica para calcular impuestos y elaborar presupuestos públicos."
+  ],
+  "answer": "B",
+  "exp": "La economía es una ciencia social. Estudia cómo se eligen y se asignan recursos limitados (trabajo, tierra, capital y capacidad empresarial) para satisfacer necesidades que son mayores que esos recursos. No se reduce a la contabilidad ni a la recaudación de impuestos.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía (versión para Latinoamérica); Robbins (1932)"
+ },
+ {
+  "id": 49,
+  "tema": "Qué es la economía",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué significa escasez en economía?",
+  "options": [
+   "Que un país es pobre y no produce nada.",
+   "Que los precios siempre suben.",
+   "Que los recursos son limitados y no alcanzan para satisfacer todos los deseos.",
+   "Que el gobierno prohíbe el consumo de ciertos bienes."
+  ],
+  "answer": "C",
+  "exp": "La escasez es un problema relativo: los deseos superan a los recursos disponibles. La enfrentan tanto una persona de bajos ingresos como una de altos ingresos, y también la sociedad en su conjunto, porque siempre hay que elegir entre usos alternativos.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía (versión para Latinoamérica)"
+ },
+ {
+  "id": 50,
+  "tema": "Qué es la economía",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "La escasez solo afecta a las personas o a los países pobres.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. La escasez es universal. Aunque una persona rica pueda comprar muchos bienes, su tiempo, su atención y los recursos productivos de la sociedad siguen siendo limitados, así que siempre hay que elegir.",
+  "model": "",
+  "src": "Parkin, Microeconomía (versión para Latinoamérica)"
+ },
+ {
+  "id": 51,
+  "tema": "Qué es la estadística",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué es la estadística?",
+  "options": [
+   "Una rama de la contabilidad que solo registra costos de una empresa.",
+   "La ciencia que recoge, organiza, presenta, analiza e interpreta datos para describir hechos y apoyar decisiones.",
+   "Un conjunto de gráficos decorativos sin método.",
+   "La teoría que explica por qué suben los precios."
+  ],
+  "answer": "B",
+  "exp": "La estadística es el método científico para trabajar con datos: recogerlos, ordenarlos, resumirlos, presentarlos y, cuando hace falta, inferir conclusiones sobre una población a partir de una muestra. En economía se usa para precios, producción, empleo, costos y muchos otros indicadores.",
+  "model": "",
+  "src": "Triola, Estadística; nociones estándar de estadística descriptiva e inferencial aplicadas a la economía"
+ },
+ {
+  "id": 52,
+  "tema": "Qué es la estadística",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Un analista calcula el precio promedio del lavado de autos en 20 talleres de su ciudad. ¿Qué tipo de estadística está usando principalmente?",
+  "options": [
+   "Estadística inferencial, porque ya está pronosticando el PIB nacional.",
+   "Estadística descriptiva, porque resume un conjunto de datos observados.",
+   "Economía normativa, porque recomienda un precio justo.",
+   "Macroeconomía, porque trabaja con un promedio."
+  ],
+  "answer": "B",
+  "exp": "Resumir datos observados (promedio, mediana, tablas o gráficos de esos 20 talleres) es estadística descriptiva. La inferencial iría un paso más allá: usar esa muestra para estimar o contrastar algo sobre todos los talleres de la ciudad, con un margen de error.",
+  "model": "",
+  "src": "Triola, Estadística; distinción estándar entre estadística descriptiva e inferencial"
+ },
+ {
+  "id": 53,
+  "tema": "Qué es la estadística",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "La estadística sirve en economía tanto para describir datos (por ejemplo, el precio medio de un mercado) como para inferir conclusiones sobre una población a partir de una muestra.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. La parte descriptiva organiza y resume. La parte inferencial usa muestras, probabilidad e intervalos o contrastes para pronunciarse sobre un conjunto más amplio, que es lo habitual en estudios de precios, demanda o costos.",
+  "model": "",
+  "src": "Triola, Estadística; aplicaciones habituales en economía aplicada"
+ },
+ {
+  "id": 54,
+  "tema": "Microeconomía y macroeconomía",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué estudia la microeconomía?",
+  "options": [
+   "El desempeño de la economía nacional o mundial: el PIB, la inflación y el desempleo.",
+   "Las elecciones de individuos y empresas, cómo interactúan en los mercados y el efecto de algunas políticas sobre esos mercados.",
+   "Solo la política monetaria del banco central.",
+   "Únicamente la contabilidad de costos de una fábrica."
+  ],
+  "answer": "B",
+  "exp": "La microeconomía se ocupa de agentes y mercados concretos: el consumidor, la empresa, el precio de un bien, la cantidad intercambiada o una estructura de mercado. El PIB, la inflación y el desempleo son temas típicos de la macroeconomía.",
+  "model": "",
+  "src": "Parkin, Microeconomía (versión para Latinoamérica); Mankiw, Principios de economía"
+ },
+ {
+  "id": 55,
+  "tema": "Microeconomía y macroeconomía",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Cuál de estas preguntas es de macroeconomía y no de microeconomía?",
+  "options": [
+   "¿Qué le pasa a la cantidad demandada de gasolina si sube su precio?",
+   "¿Cuántos detallados le convienen al taller de Carlos para maximizar el beneficio?",
+   "¿Por qué subió la tasa de desempleo en el país este año?",
+   "¿Cómo elige un estudiante entre cuadernos y carpetas con un presupuesto fijo?"
+  ],
+  "answer": "C",
+  "exp": "La tasa de desempleo es un indicador del conjunto de la economía, propio de la macroeconomía. Las otras tres se refieren a un mercado, una empresa o un consumidor, y por eso son microeconómicas.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía (versión para Latinoamérica)"
+ },
+ {
+  "id": 56,
+  "tema": "Microeconomía y macroeconomía",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "La inflación y el crecimiento del PIB son temas típicos de la microeconomía.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. La inflación y el PIB describen el desempeño agregado de la economía, así que pertenecen a la macroeconomía. La microeconomía se centra en mercados, precios y decisiones de consumidores y empresas.",
+  "model": "",
+  "src": "Parkin, Macroeconomía / Microeconomía; Mankiw, Principios de economía"
+ },
+ {
+  "id": 57,
+  "tema": "Economía positiva y normativa",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Cuál es la diferencia entre economía positiva y economía normativa?",
+  "options": [
+   "La positiva estudia países ricos y la normativa, países pobres.",
+   "La positiva describe y explica lo que es o lo que ocurriría si cambia algo; la normativa se ocupa de lo que debería ser y usa juicios de valor.",
+   "La positiva solo usa gráficos y la normativa solo usa palabras.",
+   "No hay diferencia: son dos nombres del mismo enfoque."
+  ],
+  "answer": "B",
+  "exp": "La economía positiva formula proposiciones comprobables del tipo si ocurre A, entonces ocurre B, sin decir si eso es bueno o malo. La normativa recomienda o valora: el gobierno debería, es justo que, conviene que. Las dos se complementan, pero no son lo mismo.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Krugman y Wells, Introducción a la economía"
+ },
+ {
+  "id": 58,
+  "tema": "Economía positiva y normativa",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Cuál de estas afirmaciones es de economía normativa?",
+  "options": [
+   "Si sube el impuesto a la gasolina, la cantidad demandada tiende a bajar.",
+   "El costo fijo del taller es RD$8,000 a la semana.",
+   "El gobierno debería subsidiar el transporte público para que sea más justo.",
+   "En 2025 el precio medio del lavado en la ciudad fue RD$500."
+  ],
+  "answer": "C",
+  "exp": "La frase con debería expresa un juicio de valor sobre lo que conviene o es justo, y por eso es normativa. Las otras tres describen un hecho o una relación causa-efecto, y se pueden contrastar con datos: son positivas.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Krugman y Wells, Introducción a la economía"
+ },
+ {
+  "id": 59,
+  "tema": "Economía positiva y normativa",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "Una afirmación de economía positiva incluye necesariamente un juicio de valor sobre lo que es justo o deseable.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Justamente la economía positiva evita esos juicios: describe, explica o pronostica. Los juicios de valor corresponden a la economía normativa.",
+  "model": "",
+  "src": "Mankiw, Principios de economía"
+ },
+ {
+  "id": 60,
+  "tema": "Modelo económico",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué es un modelo económico?",
+  "options": [
+   "Una copia exacta y completa de toda la realidad, sin omitir ningún detalle.",
+   "Una representación simplificada de la realidad que ayuda a explicar o predecir un fenómeno, dejando de lado lo accesorio.",
+   "Una lista de precios publicada por el gobierno.",
+   "El presupuesto mensual de una familia."
+  ],
+  "answer": "B",
+  "exp": "Un modelo es una simplificación deliberada: relaciones, hipótesis y a veces ecuaciones o gráficos. Sirve para pensar con claridad. Si intentara incluirlo todo, perdería utilidad. La cláusula ceteris paribus (todo lo demás constante) es un ejemplo de esa simplificación.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; textos introductorios sobre modelos económicos"
+ },
+ {
+  "id": 61,
+  "tema": "Modelo económico",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "Un modelo económico solo es útil si reproduce todos los detalles de la realidad, sin simplificar nada.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. La utilidad del modelo está precisamente en simplificar: se quedan las relaciones esenciales y se apartan los detalles que no aportan al problema. Un mapa demasiado detallado puede ser tan poco práctico como no tener mapa.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; analogía habitual del mapa o plano"
+ },
+ {
+  "id": 62,
+  "tema": "Variables endógenas y exógenas",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "En un modelo económico, ¿cuál es la diferencia entre una variable endógena y una exógena?",
+  "options": [
+   "La endógena se determina dentro del modelo; la exógena entra como un dato que el modelo no explica.",
+   "La endógena es siempre un precio y la exógena es siempre una cantidad.",
+   "La endógena la fija el gobierno y la exógena la fija el mercado.",
+   "No hay diferencia: todas las variables se determinan igual."
+  ],
+  "answer": "A",
+  "exp": "Las endógenas son las que el modelo busca explicar (por ejemplo, el precio y la cantidad de equilibrio). Las exógenas se toman como dadas (ingreso, un impuesto, una preferencia) e influyen sobre las endógenas, pero no se resuelven dentro de ese modelo.",
+  "model": "",
+  "src": "Manuales de introducción a la economía y de teoría económica (variables endógenas y exógenas)"
+ },
+ {
+  "id": 63,
+  "tema": "Variables endógenas y exógenas",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "En el modelo básico de oferta y demanda de un bien, si el ingreso de los consumidores se toma como un dato, ¿cómo se clasifican el precio de equilibrio y ese ingreso?",
+  "options": [
+   "El precio es exógeno y el ingreso es endógeno.",
+   "Ambos son exógenos.",
+   "El precio de equilibrio es endógeno y el ingreso es exógeno.",
+   "Ambos son endógenos."
+  ],
+  "answer": "C",
+  "exp": "El modelo determina el precio y la cantidad de equilibrio: esas son endógenas. El ingreso se introduce como un dato que puede desplazar la demanda, así que es exógeno en este modelo (aunque en otro modelo macro podría ser endógeno).",
+  "model": "",
+  "src": "Modelo de oferta y demanda, Mankiw y Parkin; clasificación endógena/exógena"
+ },
+ {
+  "id": 64,
+  "tema": "Variables endógenas y exógenas",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "Una variable exógena es aquella cuyo valor lo determina el propio modelo.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Esa es la definición de variable endógena. La exógena se toma como dada: entra al modelo desde fuera e influye en las endógenas.",
+  "model": "",
+  "src": "Manuales de introducción a la economía (variables endógenas y exógenas)"
+ },
+ {
+  "id": 65,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué es un monopolio?",
+  "options": [
+   "Un mercado con muchas empresas que venden un producto idéntico y son tomadoras de precio.",
+   "Un mercado con una sola empresa que ofrece un bien sin sustitutos cercanos y enfrenta barreras de entrada.",
+   "Un mercado con pocas empresas que se vigilan entre sí.",
+   "Un mercado con muchas empresas que venden productos diferenciados."
+  ],
+  "answer": "B",
+  "exp": "En el monopolio hay un único vendedor, el producto no tiene sustitutos cercanos y las barreras (legales, de escala o de recursos) impiden la entrada. Esa empresa tiene poder para fijar el precio, a diferencia del competidor perfecto, que es tomador de precio.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía; Krugman y Wells, Microeconomía"
+ },
+ {
+  "id": 66,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "La característica que mejor define al oligopolio es que:",
+  "options": [
+   "Hay una sola empresa en el mercado.",
+   "Hay muchísimas empresas y ninguna influye en las demás.",
+   "Hay pocas empresas, de modo que la decisión de una afecta a las otras (interdependencia).",
+   "El producto es siempre idéntico y no hay barreras de entrada."
+  ],
+  "answer": "C",
+  "exp": "En el oligopolio hay un número pequeño de empresas con barreras de entrada. Lo distintivo es la interdependencia: cada una mira lo que hacen las rivales (precios, cantidades o publicidad). El producto puede ser idéntico o diferenciado.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía; Krugman y Wells, Microeconomía"
+ },
+ {
+  "id": 67,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué describe mejor a la competencia monopolística?",
+  "options": [
+   "Muchas empresas, producto diferenciado, cierta capacidad de fijar precio y entrada relativamente libre a largo plazo.",
+   "Una sola empresa protegida por una patente permanente, sin rivales.",
+   "Pocas empresas que forman un cártel obligatorio.",
+   "Muchas empresas, producto idéntico y todas tomadoras de precio."
+  ],
+  "answer": "A",
+  "exp": "Hay muchos vendedores, pero cada uno diferencia su producto (marca, ubicación, calidad o servicio), así que enfrenta una demanda con alguna pendiente. A largo plazo la entrada suele eliminar el beneficio económico extraordinario. No es un monopolio ni una competencia perfecta.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía; Krugman y Wells, Microeconomía"
+ },
+ {
+  "id": 68,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "En competencia perfecta, las empresas son tomadoras de precio porque:",
+  "options": [
+   "El gobierno fija todos los precios.",
+   "El producto de cada empresa es único y no tiene sustitutos.",
+   "Hay una sola empresa que impone el precio a todos.",
+   "Hay muchos vendedores de un producto homogéneo, información amplia y entrada libre, así que ninguna empresa puede alterar el precio de mercado por sí sola."
+  ],
+  "answer": "D",
+  "exp": "Las condiciones clásicas son: muchos compradores y vendedores, producto homogéneo, libre entrada y salida, y buena información. Cada empresa es tan pequeña frente al mercado que toma el precio como un dato y elige solo la cantidad.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía"
+ },
+ {
+  "id": 69,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "En un monopolio hay muchas empresas que venden un producto idéntico y cada una es tomadora de precio.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Esa es la descripción de la competencia perfecta. El monopolio tiene un solo vendedor, un bien sin sustitutos cercanos y poder para fijar el precio.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía"
+ },
+ {
+  "id": 70,
+  "tema": "Estructuras de mercado",
+  "grupo": "Temas del viernes",
+  "type": "open",
+  "q": "Define, con tus palabras, monopolio, oligopolio, competencia monopolística y competencia perfecta. En cada caso indica cuántas empresas hay, cómo es el producto y si la empresa puede fijar el precio.",
+  "options": [],
+  "answer": "",
+  "exp": "Criterio: número de empresas, diferenciación del producto, barreras de entrada y poder para fijar el precio.",
+  "model": "Competencia perfecta: muchas empresas, producto homogéneo, entrada libre; cada empresa es tomadora de precio. Competencia monopolística: muchas empresas, producto diferenciado, entrada relativamente libre; cada una tiene un poco de poder de precio, pero a largo plazo el beneficio económico extraordinario tiende a desaparecer. Oligopolio: pocas empresas, producto idéntico o diferenciado, barreras de entrada; hay interdependencia y cada una puede influir en el precio. Monopolio: una sola empresa, bien sin sustitutos cercanos, barreras altas; la empresa es fijadora de precio (sujeta a la demanda del mercado).",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía; Krugman y Wells, Microeconomía"
+ },
+ {
+  "id": 71,
+  "tema": "Indicadores microeconómicos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Cuál de estos es un indicador microeconómico?",
+  "options": [
+   "El PIB real del país.",
+   "La tasa de inflación general.",
+   "La elasticidad-precio de la demanda de gasolina.",
+   "La tasa de desempleo nacional."
+  ],
+  "answer": "C",
+  "exp": "La elasticidad-precio describe cómo reacciona la cantidad demandada de un bien concreto ante un cambio de su precio: es un indicador de un mercado, por eso es microeconómico. El PIB, la inflación general y el desempleo nacional son indicadores macroeconómicos.",
+  "model": "",
+  "src": "Mankiw, Principios de economía (elasticidad); distinción micro/macro de indicadores"
+ },
+ {
+  "id": 72,
+  "tema": "Indicadores microeconómicos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Un taller quiere medir su desempeño como empresa. ¿Cuál conjunto corresponde a indicadores microeconómicos?",
+  "options": [
+   "Precio del servicio, cantidad vendida, costos medios, ingreso marginal y beneficio.",
+   "Tasa de política monetaria e inflación subyacente.",
+   "Deuda pública y déficit fiscal.",
+   "Tipo de cambio, reserva internacional y PIB."
+  ],
+  "answer": "A",
+  "exp": "A escala de empresa o de mercado se observan precios, cantidades, costos, ingresos, beneficios, productividad o excedentes del consumidor y del productor. Los agregados nacionales (PIB, inflación, tipo de cambio, deuda pública) son macroeconómicos.",
+  "model": "",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía"
+ },
+ {
+  "id": 73,
+  "tema": "Indicadores microeconómicos",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "El PIB, la inflación y la tasa de desempleo son los principales indicadores microeconómicos de una empresa.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. Esos tres son indicadores macroeconómicos del conjunto de la economía. En microeconomía se miran, entre otros, el precio y la cantidad de un mercado, las elasticidades, los costos, los ingresos, el beneficio y los excedentes.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Microeconomía y Macroeconomía"
+ },
+ {
+  "id": 74,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "En la contabilidad de costos, ¿cuál es la diferencia principal entre un costo del producto y un gasto del período?",
+  "options": [
+   "El gasto se inventaría y el costo nunca aparece en los estados financieros.",
+   "El costo solo existe en monopolio y el gasto solo en competencia perfecta.",
+   "No hay diferencia: costo, coste y gasto significan exactamente lo mismo en todos los casos.",
+   "El costo del producto se incorpora al bien (se inventaría) hasta venderlo; el gasto del período se reconoce en el momento y no forma parte del inventario."
+  ],
+  "answer": "D",
+  "exp": "Los costos del producto (materiales directos, mano de obra directa y costos indirectos de fabricación) viajan con el inventario y se convierten en costo de lo vendido al venderse. Los gastos del período (administración, ventas o intereses) no se incorporan al producto y se registran en el período en que se incurren. Coste y costo, en cambio, suelen usarse como sinónimos (coste es más habitual en España).",
+  "model": "",
+  "src": "Horngren, Contabilidad de costos; distinción estándar costo del producto frente a gasto del período"
+ },
+ {
+  "id": 75,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Un taller de mecánica paga RD$8,000 semanales de alquiler (costo fijo) y RD$150 de piezas por cada trabajo (costo variable). Si completa 40 trabajos en la semana, ¿cuál es su costo total?",
+  "options": [
+   "RD$14,000",
+   "RD$14,150",
+   "RD$6,000",
+   "RD$8,000"
+  ],
+  "answer": "A",
+  "exp": "Paso 1: CV = 150 × 40 = RD$6,000. Paso 2: CT = CF + CV = 8,000 + 6,000 = RD$14,000. El alquiler no se multiplica por 40, porque el costo fijo no cambia con la cantidad en el corto plazo.",
+  "model": "",
+  "src": "Parkin, Microeconomía (costos de corto plazo); Mankiw, Principios de economía"
+ },
+ {
+  "id": 76,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Con los datos del taller anterior (CF = RD$8,000 y CV = RD$6,000 para 40 trabajos), ¿cuál es el costo total medio (CMe) de cada trabajo?",
+  "options": [
+   "RD$14,000",
+   "RD$150",
+   "RD$200",
+   "RD$350"
+  ],
+  "answer": "D",
+  "exp": "CMe = CT / Q = 14,000 / 40 = RD$350. También: CFMe = 8,000 / 40 = 200 y CVMe = 6,000 / 40 = 150, y se cumple CFMe + CVMe = CMe = 350.",
+  "model": "",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía (costos medios)"
+ },
+ {
+  "id": 77,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "El costo total de una imprenta es RD$25,000 con 10 ejemplares y RD$26,400 con 11 ejemplares. ¿Cuál es el coste marginal del ejemplar número 11?",
+  "options": [
+   "RD$1,400",
+   "RD$2,400",
+   "RD$25,000",
+   "RD$2,545"
+  ],
+  "answer": "A",
+  "exp": "El coste marginal es el aumento del costo total al producir una unidad más: CMg = ΔCT / ΔQ = (26,400 - 25,000) / (11 - 10) = 1,400 / 1 = RD$1,400. No se divide el costo total entre 11 (eso sería un costo medio).",
+  "model": "",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía (coste marginal)"
+ },
+ {
+  "id": 78,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "En un taller, ¿cuál de estas partidas es un gasto del período y no un costo del producto?",
+  "options": [
+   "La electricidad de la zona de producción.",
+   "Las piezas que se instalan en el vehículo del cliente.",
+   "El salario de los mecánicos que hacen la reparación.",
+   "La campaña de publicidad en la radio."
+  ],
+  "answer": "D",
+  "exp": "Las piezas son materiales directos, el salario de los mecánicos es mano de obra directa y la electricidad de producción es un costo indirecto de fabricación: las tres son costos del producto. La publicidad es un gasto de ventas del período: no se incorpora al inventario del trabajo.",
+  "model": "",
+  "src": "Horngren, Contabilidad de costos (costos del producto frente a gastos del período)"
+ },
+ {
+  "id": 79,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "En el corto plazo, el costo fijo total de una empresa cambia cada vez que produce una unidad más.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "F",
+  "exp": "Falso. El costo fijo total no varía con la cantidad en el corto plazo (alquiler, seguros o depreciación de la planta). Lo que sí cambia al producir más es el costo variable y, por lo tanto, el costo total. El costo fijo medio sí baja cuando sube Q, porque se reparte entre más unidades.",
+  "model": "",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía"
+ },
+ {
+  "id": 80,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "En los textos de economía, coste y costo suelen referirse al mismo concepto; gasto, en cambio, no siempre es un sinónimo, sobre todo en contabilidad.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. Coste es la forma más usada en España y costo en América Latina, pero apuntan al valor de los recursos empleados. Gasto, en contabilidad, suele reservarse para erogaciones del período que no se incorporan al producto.",
+  "model": "",
+  "src": "Uso académico de coste/costo; Horngren, Contabilidad de costos, para la distinción con gasto"
+ },
+ {
+  "id": 81,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "open",
+  "q": "Un taller de detallado tiene un costo fijo semanal de RD$5,000. El costo variable es RD$400 por vehículo. Esta semana atiende 20 vehículos. Calcula: (a) el costo variable total; (b) el costo total; (c) el costo fijo medio; (d) el costo variable medio; (e) el costo total medio. (f) Si atiende 21 vehículos y el costo total pasa a RD$13,450, ¿cuál es el coste marginal del vehículo 21?",
+  "options": [],
+  "answer": "",
+  "exp": "Fórmulas: CV = CVu × Q; CT = CF + CV; CFMe = CF/Q; CVMe = CV/Q; CMe = CT/Q; CMg = ΔCT / ΔQ.",
+  "model": "(a) CV = 400 × 20 = RD$8,000. (b) CT = 5,000 + 8,000 = RD$13,000. (c) CFMe = 5,000 / 20 = RD$250. (d) CVMe = 8,000 / 20 = RD$400. (e) CMe = 13,000 / 20 = RD$650 (también 250 + 400). (f) CMg del vehículo 21 = 13,450 - 13,000 = RD$450.",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía (costos fijos, variables, medios y marginales)"
+ },
+ {
+  "id": 82,
+  "tema": "Costes, costos y gastos",
+  "grupo": "Temas del viernes",
+  "type": "open",
+  "q": "La tabla muestra el costo variable de una imprenta cuyo costo fijo es RD$2,000. (a) Completa, para cada cantidad, el costo total, el costo medio y el coste marginal. (b) ¿A partir de qué unidad el coste marginal queda por encima del costo medio? ¿Qué significa eso para la curva de CMe?",
+  "options": [],
+  "answer": "",
+  "exp": "CT = CF + CV. CMe = CT/Q. CMg de la unidad Q = CT(Q) - CT(Q-1). El CMe baja mientras CMg < CMe y sube cuando CMg > CMe.",
+  "model": "CF = 2,000 en todas las filas. Q=1: CV=800, CT=2,800, CMe=2,800, CMg=800. Q=2: CV=1,400, CT=3,400, CMe=1,700, CMg=600. Q=3: CV=2,100, CT=4,100, CMe=1,366.67, CMg=700. Q=4: CV=3,000, CT=5,000, CMe=1,250, CMg=900. Q=5: CV=4,200, CT=6,200, CMe=1,240, CMg=1,200. Q=6: CV=5,800, CT=7,800, CMe=1,300, CMg=1,600. (b) En la sexta unidad CMg (1,600) supera a CMe (que pasa de 1,240 a 1,300). Eso indica que la curva de CMe alcanzó su mínimo alrededor de 5 unidades y empieza a subir: el CMg corta al CMe en su punto más bajo.",
+  "src": "Parkin, Microeconomía; Mankiw, Principios de economía (relación entre CMg y CMe)",
+  "table": {
+   "head": [
+    "Q",
+    "CV (RD$)"
+   ],
+   "rows": [
+    [
+     "1",
+     "800"
+    ],
+    [
+     "2",
+     "1,400"
+    ],
+    [
+     "3",
+     "2,100"
+    ],
+    [
+     "4",
+     "3,000"
+    ],
+    [
+     "5",
+     "4,200"
+    ],
+    [
+     "6",
+     "5,800"
+    ]
+   ]
+  }
+ },
+ {
+  "id": 83,
+  "tema": "Demanda agregada",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué es la demanda agregada?",
+  "options": [
+   "El gasto total planeado en bienes y servicios de la economía, a cada nivel general de precios, que se resume como C + I + G + XN.",
+   "La cantidad que una empresa está dispuesta a producir.",
+   "El conjunto de costos fijos de todas las empresas.",
+   "La cantidad que demanda un solo consumidor de un bien."
+  ],
+  "answer": "A",
+  "exp": "La demanda agregada (DA) suma el consumo de los hogares (C), la inversión (I), el gasto público (G) y las exportaciones netas (XN = exportaciones menos importaciones). Se representa como una curva que, a un nivel de precios más alto, suele corresponder a una menor cantidad demandada agregada.",
+  "model": "",
+  "src": "Mankiw, Principios de economía (demanda agregada); Parkin, Macroeconomía"
+ },
+ {
+  "id": 84,
+  "tema": "Demanda agregada",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Si el gobierno aumenta su gasto en obras públicas y no cambia el nivel general de precios, ¿qué ocurre con la demanda agregada?",
+  "options": [
+   "Se desplaza hacia la derecha (aumenta).",
+   "Se desplaza hacia la izquierda (disminuye).",
+   "No se mueve, porque el gasto público no forma parte de la DA.",
+   "Se vuelve una línea vertical."
+  ],
+  "answer": "A",
+  "exp": "G es un componente de la DA. Un aumento autónomo del gasto público, con el nivel de precios constante, desplaza la curva de DA hacia la derecha. Un movimiento a lo largo de la curva ocurriría si lo que cambia es el propio nivel de precios, no un componente autónomo.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Macroeconomía"
+ },
+ {
+  "id": 85,
+  "tema": "Demanda agregada",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "Un aumento del nivel general de precios, manteniendo lo demás constante, suele reducir la cantidad demandada agregada y se representa como un movimiento a lo largo de la curva de DA, no como un desplazamiento de la curva.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. La curva de DA tiene pendiente negativa por efectos como el de riqueza, el de la tasa de interés y el del tipo de cambio. Eso es un movimiento a lo largo de la curva. Un desplazamiento exige un cambio de C, I, G o XN que no se deba al nivel de precios.",
+  "model": "",
+  "src": "Mankiw, Principios de economía (pendiente y desplazamientos de la DA)"
+ },
+ {
+  "id": 86,
+  "tema": "Oferta agregada",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "¿Qué es la oferta agregada?",
+  "options": [
+   "La suma de los impuestos que recauda el gobierno.",
+   "La cantidad de un bien que ofrece una sola empresa.",
+   "El gasto de las familias en consumo.",
+   "La cantidad total de bienes y servicios que las empresas de la economía están dispuestas a producir a cada nivel general de precios."
+  ],
+  "answer": "D",
+  "exp": "La oferta agregada (OA) describe la producción total planeada por las empresas según el nivel general de precios. En el corto plazo la curva suele tener pendiente positiva; en el largo plazo se representa vertical en el producto potencial, cuando los precios y los salarios se han ajustado.",
+  "model": "",
+  "src": "Mankiw, Principios de economía (oferta agregada); Parkin, Macroeconomía"
+ },
+ {
+  "id": 87,
+  "tema": "Oferta agregada",
+  "grupo": "Temas del viernes",
+  "type": "mc",
+  "q": "Un alza generalizada en el precio del petróleo encarece un insumo clave para muchas empresas. En el corto plazo, ¿qué le ocurre a la oferta agregada?",
+  "options": [
+   "No cambia, porque los insumos no afectan a la OA.",
+   "Se convierte en la curva de demanda agregada.",
+   "Se desplaza a la derecha, porque producir se vuelve más barato.",
+   "Se desplaza a la izquierda, porque producir se vuelve más costoso."
+  ],
+  "answer": "D",
+  "exp": "Un choque de costos negativo (como un petróleo más caro) eleva los costos de producción y, a cada nivel de precios, las empresas ofrecen menos. Eso desplaza la OA de corto plazo hacia la izquierda. Un aumento de la productividad haría el desplazamiento contrario.",
+  "model": "",
+  "src": "Mankiw, Principios de economía; Parkin, Macroeconomía (choques de oferta)"
+ },
+ {
+  "id": 88,
+  "tema": "Oferta agregada",
+  "grupo": "Temas del viernes",
+  "type": "tf",
+  "q": "En el largo plazo, la oferta agregada se representa como una recta vertical en el nivel de producción potencial, porque los salarios y los precios se ajustan y la producción no depende del nivel general de precios.",
+  "options": [
+   "Verdadero",
+   "Falso"
+  ],
+  "answer": "V",
+  "exp": "Verdadero. La OA de largo plazo está en el producto potencial (o natural), determinado por la tecnología, el capital, el trabajo y las instituciones, no por el nivel de precios. En el corto plazo, con salarios rígidos, la OA puede tener pendiente positiva.",
+  "model": "",
+  "src": "Mankiw, Principios de economía (OA de corto y de largo plazo)"
  }
 ];
-const TEMAS = ["Curvas de indiferencia","Restricción presupuestaria","Cambios en ingreso y precios, y equilibrio","Clasificación de los costos","Ingreso marginal, coste marginal y maximización"];
+const TEMAS = [
+ "Qué es la economía",
+ "Qué es la estadística",
+ "Microeconomía y macroeconomía",
+ "Economía positiva y normativa",
+ "Modelo económico",
+ "Variables endógenas y exógenas",
+ "Estructuras de mercado",
+ "Indicadores microeconómicos",
+ "Costes, costos y gastos",
+ "Demanda agregada",
+ "Oferta agregada",
+ "Curvas de indiferencia",
+ "Restricción presupuestaria",
+ "Cambios en ingreso y precios, y equilibrio",
+ "Clasificación de los costos",
+ "Ingreso marginal, coste marginal y maximización"
+];
+const GRUPOS = [
+ "Temas del viernes",
+ "Compendio del profesor"
+];
+const GRUPO_TEMAS = {
+ "Temas del viernes": [
+  "Qué es la economía",
+  "Qué es la estadística",
+  "Microeconomía y macroeconomía",
+  "Economía positiva y normativa",
+  "Modelo económico",
+  "Variables endógenas y exógenas",
+  "Estructuras de mercado",
+  "Indicadores microeconómicos",
+  "Costes, costos y gastos",
+  "Demanda agregada",
+  "Oferta agregada"
+ ],
+ "Compendio del profesor": [
+  "Curvas de indiferencia",
+  "Restricción presupuestaria",
+  "Cambios en ingreso y precios, y equilibrio",
+  "Clasificación de los costos",
+  "Ingreso marginal, coste marginal y maximización"
+ ]
+};
 (function(){
 var SUBS=TEMAS;
 var TIPOS={mc:"Selección múltiple",tf:"Verdadero o falso",open:"Desarrollo"};
@@ -629,6 +1668,12 @@ $("themeBtn").onclick=function(){var t=document.documentElement.getAttribute("da
 var cnt={mc:0,tf:0,open:0};BANCO.forEach(function(p){cnt[p.type]++;});
 $("bankTotal").textContent=BANCO.length;
 $("bankMix").textContent=cnt.mc+" de selección múltiple, "+cnt.tf+" de verdadero o falso y "+cnt.open+" de desarrollo";
+var catsHtml="";
+GRUPOS.forEach(function(g,k){
+  var n=BANCO.filter(function(p){return p.grupo===g;}).length;
+  catsHtml+='<label class="chip"><input type="checkbox" class="catChk" value="'+k+'" checked> '+esc(g)+' ('+n+')</label>';
+});
+$("cats").innerHTML=catsHtml;
 var subsHtml="";
 TEMAS.forEach(function(t,k){
   var n=BANCO.filter(function(p){return p.tema===t;}).length;
@@ -636,9 +1681,25 @@ TEMAS.forEach(function(t,k){
 });
 $("subs").innerHTML=subsHtml;
 function subChks(){return Array.prototype.slice.call(document.querySelectorAll(".subChk"));}
-function updToggle(){$("toggleAll").textContent=subChks().every(function(c){return c.checked;})?"Quitar todos":"Marcar todos";}
+function catChks(){return Array.prototype.slice.call(document.querySelectorAll(".catChk"));}
+function temaIndex(t){return TEMAS.indexOf(t);}
+function syncCatsFromSubs(){
+  catChks().forEach(function(c){
+    var g=GRUPOS[+c.value];
+    var ts=GRUPO_TEMAS[g];
+    c.checked=ts.every(function(t){var i=temaIndex(t);return i>=0&&subChks()[i].checked;});
+  });
+}
+function applyCat(g,on){
+  GRUPO_TEMAS[g].forEach(function(t){var i=temaIndex(t);if(i>=0)subChks()[i].checked=on;});
+}
+function updToggle(){$("toggleAll").textContent=subChks().every(function(c){return c.checked;})?"Quitar todos":"Marcar todos";syncCatsFromSubs();}
 $("toggleAll").onclick=function(){var all=subChks().every(function(c){return c.checked;});subChks().forEach(function(c){c.checked=!all;});updToggle();updDisp();};
 document.addEventListener("change",function(e){
+  if(e.target.classList&&e.target.classList.contains("catChk")){
+    applyCat(GRUPOS[+e.target.value],e.target.checked);
+    updToggle();
+  }
   if(e.target.classList&&e.target.classList.contains("subChk"))updToggle();
   if(e.target.name==="modo")$("rowTiempo").style.display=modo()==="examen"?"":"none";
   updDisp();
@@ -689,7 +1750,7 @@ function prog(){
 function letterOf(o,pos){return "ABCD"[o.order[pos]];}
 function rightText(p){return p.type==="mc"?p.options["ABCD".indexOf(p.answer)]:p.type==="tf"?(p.answer==="V"?"Verdadero":"Falso"):p.model;}
 function tagsHtml(p){
-  return '<span class="tag">'+esc(p.tema)+'</span><span class="tag">'+TIPOS[p.type]+'</span>';
+  return '<span class="tag">'+esc(p.grupo||"")+'</span><span class="tag">'+esc(p.tema)+'</span><span class="tag">'+TIPOS[p.type]+'</span>';
 }
 function tableHtml(t){
   if(!t)return "";
